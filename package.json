@@ -1,0 +1,23 @@
+{
+  "name": "@com.haina.web/haina-component-mobile",
+  "version": "1.0.0",
+  "description": "mobile component",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git@60.205.162.223:com.haina.web/haina-component-mobile.git"
+  },
+  "keywords": [
+    "haina",
+    "mobile"
+  ],
+  "author": "sunlandong",
+  "license": "ISC",
+  "dependencies": {
+    "classnames": "^2.2.5",
+    "rmc-feedback": "^1.0.3"
+  }
+}

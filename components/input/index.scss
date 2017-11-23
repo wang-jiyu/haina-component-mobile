@@ -1,0 +1,128 @@
+
+
+@import '../style/default/default.scss';
+
+
+  .haina-input-item {
+    height: $list-item-height;
+    padding-left: $h-spacing-lg;
+  }
+
+  .haina-list-line {
+    display: flex;
+    flex-direction: row;
+    border-bottom: 0.01rem solid #E4E4E4;
+  }
+
+  .haina-input-label {
+    color: $color-text-base;
+    font-size: $font-size-heading;
+    margin-left: 0;
+    margin-right: $h-spacing-sm;
+    text-align: left;
+    white-space: nowrap;
+    overflow: hidden;
+    padding: 2 * $hd 0;
+
+    &.haina-input-label-2 {
+      width: 2 * $input-label-width;
+    }
+
+    &.haina-input-label-3 {
+      width: 3 * $input-label-width;
+    }
+
+    &.haina-input-label-4 {
+      width: 4 * $input-label-width;
+    }
+
+    &.haina-input-label-5 {
+      width: 5 * $input-label-width;
+    }
+
+    &.haina-input-label-6 {
+      width: 6 * $input-label-width;
+    }
+
+    &.haina-input-label-7 {
+      width: 7 * $input-label-width;
+    }
+  }
+
+  .haina-input-control {
+    font-size: $input-font-size;
+    flex: 1;
+    input {
+      color: $color-text-base;
+      font-size: $font-size-heading;
+      appearance: none;
+      width: 100%;
+      padding: 2 * $hd 0;
+      border: 0;
+      background-color: transparent;
+      line-height: $line-height-base;
+      box-sizing: border-box;
+      
+      &::placeholder {
+        color: #C8C8C8;
+        line-height: 1.2;
+      }
+
+      &:disabled {
+        color: $color-text-disabled;
+        background-color: #fff;
+      }
+    }
+  }
+
+  .haina-input-clear {
+    display: none;
+    width: $icon-size-sm;
+    height: $icon-size-sm;
+    border-radius: $radius-circle;
+    overflow: hidden;
+    font-style: normal;
+    color: $fill-base;
+    background-color: $input-color-icon;
+    background-repeat: no-repeat;
+    background-image: url("data:image/svg+xml;charset=utf-8,<svg fill='#fff' viewBox='0 0 30 30' xmlns='http://www.w3.org/2000/svg'><path d='M19 6.41L17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z'/><path d='M0 0h24v24H0z' fill='none'/></svg>");
+    background-size: $icon-size-sm auto;
+    background-position: 2 * $hd 2 * $hd;
+
+    &-active {
+      background-color: $input-color-icon-tap;
+    }
+  }
+
+  .haina-input-focus {
+    .haina-input-clear {
+      display: block;
+    }
+  }
+
+  .haina-input-extra {
+    flex: initial;
+    min-width: 0;
+    max-height: $icon-size-sm;
+    overflow: hidden;
+    padding-right: 0;
+    line-height: $line-height-base;
+    color: $color-text-caption;
+    font-size: $font-size-subhead;
+    margin-left: $h-spacing-sm;
+  }
+
+  .haina-input-error {
+    .haina-input-control {
+      input {
+        color: #f50;
+      }
+    }
+  }
+
+  .haina-input-disabled {
+    .haina-input-label {
+      color: $color-text-disabled;
+    }
+  }
+  
