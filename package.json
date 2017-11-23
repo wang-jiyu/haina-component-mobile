@@ -19,5 +19,9 @@
   "dependencies": {
     "classnames": "^2.2.5",
     "rmc-feedback": "^1.0.3"
+  },
+  "devDependencies": {
+    "react": "^16.1.1",
+    "react-dom": "^16.1.1"
   }
 }
