@@ -1,4 +1,3 @@
-/* tslint:disable:jsx-no-multiline-js */
 import React from 'react';
 import PropTypes from 'prop-types';
 import classnames from 'classnames';
@@ -185,8 +184,8 @@ class InputItem extends React.Component<InputItemProps, any> {
         this.inputRef.focus();
     }
     render() {
-        const {prefixCls,
-         editable, style,
+        const { prefixCls,
+            editable, style,
             clear, children, error, className, extra, labelNumber, onExtraClick, onErrorClick,
             updatePlaceholder, type, locale, moneyKeyboardAlign, ...restProps,
     } = this.props;
