@@ -1,9 +1,9 @@
-define(["require", "exports", "react", "classnames", "./index.scss"], function (require, exports, React, classnames_1) {
+define(["require", "exports", "react", "classnames", "./index.scss"], function (require, exports, React, classNames) {
     "use strict";
     Object.defineProperty(exports, "__esModule", { value: true });
     class Item extends React.Component {
         render() {
-            return <div>{this.props.children}</div>;
+            return React.createElement("div", null, this.props.children);
         }
     }
     exports.Item = Item;
@@ -57,31 +57,24 @@ define(["require", "exports", "react", "classnames", "./index.scss"], function (
                 .map(($panel, index) => {
                 const title = $panel.title;
                 const ref = `tab-menu-${index + 1}`;
-                const classes = classnames_1.default('tabs-menu-item', tabClassName, this.state.tabActive === (index + 1) && !tabBarUnderlineStyle && 'is-active', this.state.tabActive === (index + 1) && tabBarUnderlineStyle);
-                const fontClass = classnames_1.default(tabFontClassName);
-                return (<div ref={ref} key={index} className={classes} onClick={() => this.setActive(index + 1)}>
-                        <span className={fontClass} style={{ color: this.state.tabActive === (index + 1) ? tabBarActiveTextColor : tabBarInactiveTextColor }}>
-                            {title}
-                        </span>
-                    </div>);
+                const classes = classNames('tabs-menu-item', tabClassName, this.state.tabActive === (index + 1) && !tabBarUnderlineStyle && 'is-active', this.state.tabActive === (index + 1) && tabBarUnderlineStyle);
+                const fontClass = classNames(tabFontClassName);
+                return (React.createElement("div", { ref: ref, key: index, className: classes, onClick: () => this.setActive(index + 1) },
+                    React.createElement("span", { className: fontClass, style: { color: this.state.tabActive === (index + 1) ? tabBarActiveTextColor : tabBarInactiveTextColor } }, title)));
             });
-            return (<div className='tabs-navigation'>
-                <div className='tabs-menu'>{$menuItems}</div>
-            </div>);
+            return (React.createElement("div", { className: 'tabs-navigation' },
+                React.createElement("div", { className: 'tabs-menu' }, $menuItems)));
         }
         _getSelectedPanel() {
             var index = this.state.tabActive - 1;
             var $panel = this.props.children[index];
-            return (<div ref='tab-panel' className='tab-panel'>
-                {$panel}
-            </div>);
+            return (React.createElement("div", { ref: 'tab-panel', className: 'tab-panel' }, $panel));
         }
         render() {
-            var className = classnames_1.default('tabs', this.props.className);
-            return (<div className={className}>
-                {this._getMenuItems()}
-                {this._getSelectedPanel()}
-            </div>);
+            var className = classNames('tabs', this.props.className);
+            return (React.createElement("div", { className: className },
+                this._getMenuItems(),
+                this._getSelectedPanel()));
         }
     }
     Tabs.Item = Item;

@@ -1,6 +1,6 @@
 import * as React from 'react';
 import { TabsProps, TabItemProps } from './PropsType';
-import classNames from 'classnames'
+import * as classNames from 'classnames'
 import  './index.scss'
 
 export class Item extends React.Component<TabItemProps, any>{

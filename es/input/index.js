@@ -7,7 +7,7 @@ var __rest = (this && this.__rest) || function (s, e) {
             t[p[i]] = s[p[i]];
     return t;
 };
-define(["require", "exports", "react", "prop-types", "classnames", "./Input", "rmc-feedback", "./index.scss"], function (require, exports, React, prop_types_1, classnames_1, Input_1, rmc_feedback_1) {
+define(["require", "exports", "react", "prop-types", "classnames", "./Input", "rmc-feedback", "./index.scss"], function (require, exports, React, prop_types_1, classnames, Input_1, rmc_feedback_1) {
     "use strict";
     Object.defineProperty(exports, "__esModule", { value: true });
     function noop() { }
@@ -150,7 +150,7 @@ define(["require", "exports", "react", "prop-types", "classnames", "./Input", "r
             const { defaultValue, name, disabled, maxLength } = restProps;
             const { value } = this.state;
             const { placeholder, focus } = this.state;
-            const wrapCls = classnames_1.default(`${prefixCls}-item`, className, {
+            const wrapCls = classnames(`${prefixCls}-item`, className, {
                 [`${prefixCls}-disabled`]: disabled,
                 [`${prefixCls}-error`]: error,
                 [`${prefixCls}-focus`]: focus,
@@ -183,21 +183,16 @@ define(["require", "exports", "react", "prop-types", "classnames", "./Input", "r
                     className: 'h5numInput',
                 };
             }
-            return (<div className={wrapCls}>
-                <div className={`haina-list-line`}>
-                    {children ? (<div className={labelCls}>{children}</div>) : null}
-                    <div className={controlCls}>
-                        {(<Input_1.default {...patternProps} {...restProps} {...classNameProps} value={fixControlledValue(value)} defaultValue={defaultValue} ref={el => this.inputRef = el} style={style} type={inputType} maxLength={maxLength} name={name} placeholder={placeholder} onChange={this.onInputChange} onFocus={this.onInputFocus} onBlur={this.onInputBlur} readOnly={!editable} disabled={disabled}/>)}
-                    </div>
-                    {clear && editable && !disabled && (value && `${value}`.length > 0) ?
-                <rmc_feedback_1.default activeClassName={`${prefixCls}-clear-active`}>
-                            <div className={`${prefixCls}-clear`} onClick={this.clearInput}/>
-                        </rmc_feedback_1.default>
-                : null}
-                    {error ? (<div className={`${prefixCls}-error-extra`} onClick={this.onErrorClick}/>) : null}
-                    {extra !== '' ? <div className={`${prefixCls}-extra`} onClick={this.onExtraClick}>{extra}</div> : null}
-                </div>
-            </div>);
+            return (React.createElement("div", { className: wrapCls },
+                React.createElement("div", { className: `haina-list-line` },
+                    children ? (React.createElement("div", { className: labelCls }, children)) : null,
+                    React.createElement("div", { className: controlCls }, (React.createElement(Input_1.default, Object.assign({}, patternProps, restProps, classNameProps, { value: fixControlledValue(value), defaultValue: defaultValue, ref: el => this.inputRef = el, style: style, type: inputType, maxLength: maxLength, name: name, placeholder: placeholder, onChange: this.onInputChange, onFocus: this.onInputFocus, onBlur: this.onInputBlur, readOnly: !editable, disabled: disabled })))),
+                    clear && editable && !disabled && (value && `${value}`.length > 0) ?
+                        React.createElement(rmc_feedback_1.default, { activeClassName: `${prefixCls}-clear-active` },
+                            React.createElement("div", { className: `${prefixCls}-clear`, onClick: this.clearInput }))
+                        : null,
+                    error ? (React.createElement("div", { className: `${prefixCls}-error-extra`, onClick: this.onErrorClick })) : null,
+                    extra !== '' ? React.createElement("div", { className: `${prefixCls}-extra`, onClick: this.onExtraClick }, extra) : null)));
         }
     }
     Input.defaultProps = {

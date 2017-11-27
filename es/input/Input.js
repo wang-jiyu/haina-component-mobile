@@ -31,7 +31,7 @@ define(["require", "exports", "react"], function (require, exports, React) {
         }
         render() {
             const _a = this.props, { onBlur, onFocus } = _a, others = __rest(_a, ["onBlur", "onFocus"]);
-            return (<input ref={el => this.inputRef = el} onBlur={this.onInputBlur} onFocus={this.onInputFocus} {...others}/>);
+            return (React.createElement("input", Object.assign({ ref: el => this.inputRef = el, onBlur: this.onInputBlur, onFocus: this.onInputFocus }, others)));
         }
     }
     exports.default = Input;

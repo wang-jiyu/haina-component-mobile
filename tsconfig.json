@@ -23,7 +23,7 @@
     //    "noUnusedParameters": true,
     //    "noUnusedLocals": true,
     //    "strict": true,
-    "jsx": "preserve",
+    "jsx": "react",
     "moduleResolution": "node"
     //      "outDir": "./lib",//react报错
     //  "outFile": "ace-mobile.js"
