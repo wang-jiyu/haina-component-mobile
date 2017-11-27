@@ -1,4 +1,4 @@
-import React from 'react';
+import * as  React from 'react';
 import PropTypes from 'prop-types';
 import classnames from 'classnames';
 import BasePropsType from './PropsType';
@@ -21,7 +21,7 @@ function fixControlledValue(value) {
     return value;
 }
 
-class InputItem extends React.Component<InputItemProps, any> {
+class Input extends React.Component<InputItemProps, any> {
     static defaultProps = {
         prefixCls: 'haina-input',
         type: 'text',
@@ -274,4 +274,4 @@ class InputItem extends React.Component<InputItemProps, any> {
     }
 }
 
-export default InputItem;
+export default Input;

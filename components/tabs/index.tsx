@@ -1,4 +1,4 @@
-import React from 'react';
+import * as React from 'react';
 import { TabsProps, TabItemProps } from './PropsType';
 import classNames from 'classnames'
 import  './index.scss'
