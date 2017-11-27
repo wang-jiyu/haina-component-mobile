@@ -11,7 +11,7 @@ var tsProj = ts.createProject('tsconfig.json');
 var livereload = require('gulp-livereload');
 
 gulp.task('css', () => {
-    return gulp.src(['components/**/*.css'])
+    return gulp.src(['components/**/*.scss'])
         .pipe(gulp.dest('es'));
 })
 
