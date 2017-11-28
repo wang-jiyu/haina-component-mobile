@@ -79,7 +79,9 @@ export default class Swiper extends React.Component<SwiperProps, any> {
                             'haina-swiper-child',
                             childClass
                         )
-                        return React.cloneElement(child as any, { className: childClasses });
+                        return <div className={childClasses}>
+                            {child}
+                        </div>;
                     })}
                 </div>
             </div>

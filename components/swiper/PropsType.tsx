@@ -5,9 +5,9 @@ export interface SwiperProps{
         startSlide?:number,
         speed?:number,
         auto?:number,
-        continuous?:true,
-        disableScroll?:true,
-        stopPropagation?:true,
+        continuous?:boolean,
+        disableScroll?:boolean,
+        stopPropagation?:boolean,
         swiping?:Function,
         callback?:Function,
         transitionEnd?:Function
