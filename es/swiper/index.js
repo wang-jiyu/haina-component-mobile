@@ -8,13 +8,13 @@ define(["require", "exports", "react", "classnames", "swipe-js-iso", "./index.sc
         }
         componentDidMount() {
             const { swipeOptions } = this.props;
-            this.swipe = swipe_js_iso_1.default(this.container, swipeOptions);
+            this.swipe = swipe_js_iso_1(this.container, swipeOptions);
         }
         componentDidUpdate(prevProps) {
             const { childCount, swipeOptions } = this.props;
             if (prevProps.childCount !== childCount) {
                 this.swipe.kill();
-                this.swipe = swipe_js_iso_1.default(this.container, swipeOptions);
+                this.swipe = swipe_js_iso_1(this.container, swipeOptions);
             }
         }
         componentWillUnmount() {
