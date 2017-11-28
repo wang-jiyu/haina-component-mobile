@@ -79,7 +79,11 @@ export default class Swiper extends React.Component<SwiperProps, any> {
                             'haina-swiper-child',
                             childClass
                         )
-                        return <div className={childClasses}>
+                        return <div className={childClasses} style={{
+                            float: 'left',
+                            position: 'relative',
+                            transitionProperty: 'transform'
+                        }}>
                             {child}
                         </div>;
                     })}

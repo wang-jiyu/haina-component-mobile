@@ -57,12 +57,13 @@ define(["require", "exports", "react", "classnames", "./index.scss"], function (
                 .map(($panel, index) => {
                 const title = $panel.title;
                 const ref = `tab-menu-${index + 1}`;
-                const classes = classNames('tabs-menu-item', tabClassName, this.state.tabActive === (index + 1) && !tabBarUnderlineStyle && 'is-active', this.state.tabActive === (index + 1) && tabBarUnderlineStyle);
+                const classes = classNames('tabs-menu-item', this.state.tabActive === (index + 1) && !tabBarUnderlineStyle && 'is-active', this.state.tabActive === (index + 1) && tabBarUnderlineStyle);
                 const fontClass = classNames(tabFontClassName);
                 return (React.createElement("div", { ref: ref, key: index, className: classes, onClick: () => this.setActive(index + 1) },
                     React.createElement("span", { className: fontClass, style: { color: this.state.tabActive === (index + 1) ? tabBarActiveTextColor : tabBarInactiveTextColor } }, title)));
             });
-            return (React.createElement("div", { className: 'tabs-navigation' },
+            const classes = classNames('tabs-navigation', tabClassName);
+            return (React.createElement("div", { className: classes },
                 React.createElement("div", { className: 'tabs-menu' }, $menuItems)));
         }
         _getSelectedPanel() {

@@ -74,7 +74,6 @@ export default class Tabs extends React.PureComponent<TabsProps, any> {
                 
                 const classes = classNames(
                     'tabs-menu-item',
-                    tabClassName,
                     this.state.tabActive === (index + 1) && !tabBarUnderlineStyle && 'is-active',
                     this.state.tabActive === (index + 1) &&  tabBarUnderlineStyle
                 );
@@ -89,9 +88,9 @@ export default class Tabs extends React.PureComponent<TabsProps, any> {
                     </div>
                 );
             });
-
+        const classes = classNames('tabs-navigation',tabClassName)
         return (
-            <div className='tabs-navigation'>
+            <div className={classes}>
                 <div className='tabs-menu'>{$menuItems}</div>
             </div>
         );

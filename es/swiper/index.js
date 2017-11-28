@@ -46,7 +46,11 @@ define(["require", "exports", "react", "classnames", "swipe-js-iso", "./index.sc
                         return null;
                     }
                     const childClasses = classNames('haina-swiper-child', childClass);
-                    return React.createElement("div", { className: childClasses }, child);
+                    return React.createElement("div", { className: childClasses, style: {
+                            float: 'left',
+                            position: 'relative',
+                            transitionProperty: 'transform'
+                        } }, child);
                 }))));
         }
     }
