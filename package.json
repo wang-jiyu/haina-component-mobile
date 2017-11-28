@@ -18,7 +18,8 @@
   "license": "ISC",
   "dependencies": {
     "classnames": "^2.2.5",
-    "rmc-feedback": "^1.0.3"
+    "rmc-feedback": "^1.0.3",
+    "swipe-js-iso": "^2.0.4"
   },
   "devDependencies": {
     "@types/react": "^16.0.25",

@@ -1,0 +1,19 @@
+
+
+
+.haina-swiper{
+    overflow: hidden;
+    position: relative;
+    visibility: hidden;
+
+    .haina-wrapper{
+        overflow: hidden;
+        position: relative;
+        .haina-swiper-child{
+            float: 'left';
+            width: '100%';
+            position: 'relative';
+            transition-property: 'transform';
+        }
+    }
+}
