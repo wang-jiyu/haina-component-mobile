@@ -10,12 +10,7 @@ export default class Swiper extends React.Component<SwiperProps, any> {
     };
     constructor(props: any);
     componentDidMount(): void;
-    componentDidUpdate(prevProps: any): void;
     componentWillUnmount(): void;
-    next(): void;
-    prev(): void;
-    slide(...args: any[]): void;
-    getPos(): any;
-    getNumSlides(): any;
+    refresh(): void;
     render(): JSX.Element;
 }

@@ -1,7 +1,7 @@
 import * as React from 'react';
 import { SwiperProps } from './PropsType';
 import * as classNames from 'classnames'
-import Swipe from 'swipe-js-iso';
+import Flipsnap from './lib/flipsnap';
 import './index.scss'
 
 export default class Swiper extends React.Component<SwiperProps, any> {
@@ -21,76 +21,48 @@ export default class Swiper extends React.Component<SwiperProps, any> {
     }
 
     componentDidMount() {
-        const { swipeOptions } = this.props;
+        const { swipeOptions, children } = this.props;
+        this.swipe = Flipsnap(this.refs.container, {
+            distance: swipeOptions.distance,
+            currentPoint: swipeOptions.currentPoint
+        });
 
-        this.swipe = Swipe(this.container, swipeOptions);
-    }
-    componentDidUpdate(prevProps) {
-        const { childCount, swipeOptions } = this.props;
+        // 各个阶段事件监听
+        this.swipe.element.addEventListener('fstouchstart', function (ev) {
+            swipeOptions.swTouchstart && swipeOptions.swTouchstart(ev);
+        }, false);
 
-        if (prevProps.childCount !== childCount) {
-            this.swipe.kill();
-            this.swipe = Swipe(this.container, swipeOptions);
-        }
+        this.swipe.element.addEventListener('fstouchmove', function (ev) {
+            swipeOptions.swTouchmove && swipeOptions.swTouchmove(ev);
+        }, false);
+
+        this.swipe.element.addEventListener('fstouchend', ev => {
+            swipeOptions.swTouchend && swipeOptions.swTouchend(ev);
+        }, false);
     }
+    // 注销
     componentWillUnmount() {
-        this.swipe.kill();
-        this.swipe = void 0;
-    }
-    next() {
-        this.swipe.next();
+        this.swipe.destroy();
     }
 
-    prev() {
-        this.swipe.prev();
+    refresh() {
+        this.swipe.refresh();
     }
-
-    slide(...args) {
-        this.swipe.slide(...args);
-    }
-
-    getPos() {
-        return this.swipe.getPos();
-    }
-
-    getNumSlides() {
-        return this.swipe.getNumSlides();
-    }
-
     render() {
-        const { id, className, containerClass, wrapperClass, childClass, children } = this.props;
+        const { id, className, wrapperClass, childClass, children } = this.props;
         const classes = classNames(
-            'haina-swiper',
-            className,
-            containerClass
-        )
-        const wrapperClasses = classNames(
-            'haina-wrapper',
+            'className',
             wrapperClass
-        )
+        );
+        // todo 计算 父级包裹元素的宽度
         return (
-            <div ref={container => this.container = container} id={id} className={classes}>
-                <div className={wrapperClasses}>
-                    {React.Children.map(children, (child) => {
-                        if (!child) {
-                            return null;
-                        }
-                        const childClasses = classNames(
-                            'haina-swiper-child',
-                            childClass
-                        )
-                        return <div className={childClasses} style={{
-                            float: 'left',
-                            position: 'relative',
-                            transitionProperty: 'transform'
-                        }}>
-                            {child}
-                        </div>;
-                    })}
-                </div>
+            <div className={classes} ref="container">
+                {children}
             </div>
         );
     }
+
+    
 
 
 }
