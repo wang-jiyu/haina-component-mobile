@@ -1,5 +1,6 @@
 .tabs-menu {
     display: flex;
+    height:100%;
     flex-direction: row;
     justify-content: space-between;
     list-style: none;
@@ -20,6 +21,5 @@
 }
 
 .tab-panel {
-    padding: 0.1rem 0.5rem;
 }
   
