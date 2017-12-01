@@ -1,6 +1,6 @@
 import * as React from 'react';
 import classNames from 'classnames';
-import './rlist-view.css';
+import './index.scss';
 import IScrollViewProps from './PropsType'
 import LoadMore from './loadmore-component/LoadMore'
 import Refresh from './refresh-component/Refresh'
@@ -18,8 +18,8 @@ export default class ScrollView extends React.Component<IScrollViewProps, any> {
     useWindowScroll: false,
     disableInfiniteScroll: false,
     disableRefresh: false,
-    refresh: () => Promise.resolve(),
-    loadMore: () => Promise.resolve(),
+    refresh: ():Promise<any>=>Promise.resolve(),
+    loadMore: ():Promise<any>=>Promise.resolve(),
     refreshComponent: LoadMore,
     loadMoreComponent: Refresh
   }
@@ -69,7 +69,7 @@ export default class ScrollView extends React.Component<IScrollViewProps, any> {
       topPosition: -this.refreshDom.clientHeight
     });
 
-    this.refresh(false);
+    // this.refresh(false);
 
     if (this.props.useWindowScroll) {
       this.listendScroll(window);
@@ -175,15 +175,14 @@ export default class ScrollView extends React.Component<IScrollViewProps, any> {
   render() {
     const props = this.props;
     const state = this.state;
-    const { className } = props
+    const { height } = props
     return (
       <div
-        className={classNames('haina-view-component', {
-          className
-        })}
+        className={classNames('haina-view-component', props.className)}
         ref={ref => this.rootDom = ref}
         onTouchStart={this.onTouchStart}
         onTouchEnd={this.onTouchEnd}
+        style={{height:height}}
       >
         <div
           ref={ref => this.refreshDom = ref}

@@ -1,6 +1,6 @@
 /// <reference types="react" />
 import * as React from 'react';
-import './rlist-view.css';
+import './index.scss';
 import IScrollViewProps from './PropsType';
 import LoadMore from './loadmore-component/LoadMore';
 import Refresh from './refresh-component/Refresh';
@@ -10,8 +10,8 @@ export default class ScrollView extends React.Component<IScrollViewProps, any> {
         useWindowScroll: boolean;
         disableInfiniteScroll: boolean;
         disableRefresh: boolean;
-        refresh: () => Promise<void>;
-        loadMore: () => Promise<void>;
+        refresh: () => Promise<any>;
+        loadMore: () => Promise<any>;
         refreshComponent: typeof LoadMore;
         loadMoreComponent: typeof Refresh;
     };

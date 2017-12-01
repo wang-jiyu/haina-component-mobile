@@ -1,14 +1,15 @@
 
   export default interface IScrollViewProps {
-      className?:Array<string>|string|object,
+      height?:number,
       refresh?:Function,
       loadMore?:Function,
       refreshComponent?:any,
       loadMoreComponent?:any,
-      threshold:number,
-      useWindowScroll:boolean,
-      disableInfiniteScroll:boolean,
-      disableRefresh:boolean
+      threshold?:number,
+      useWindowScroll?:boolean,
+      disableInfiniteScroll?:boolean,
+      disableRefresh?:boolean,
+      className?:Array<string>|string|object,
   }
 
   export interface IRefreshProps {

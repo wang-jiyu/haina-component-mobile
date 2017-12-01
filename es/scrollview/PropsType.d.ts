@@ -4,10 +4,10 @@ export default interface IScrollViewProps {
     loadMore?: Function;
     refreshComponent?: any;
     loadMoreComponent?: any;
-    threshold: number;
-    useWindowScroll: boolean;
-    disableInfiniteScroll: boolean;
-    disableRefresh: boolean;
+    threshold?: number;
+    useWindowScroll?: boolean;
+    disableInfiniteScroll?: boolean;
+    disableRefresh?: boolean;
 }
 export interface IRefreshProps {
     isRefreshing: boolean;

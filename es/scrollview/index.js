@@ -1,4 +1,4 @@
-define(["require", "exports", "react", "classnames", "./loadmore-component/LoadMore", "./refresh-component/Refresh", "./fn/before", "./rlist-view.css"], function (require, exports, React, classnames_1, LoadMore_1, Refresh_1, before_1) {
+define(["require", "exports", "react", "classnames", "./loadmore-component/LoadMore", "./refresh-component/Refresh", "./fn/before", "./index.scss"], function (require, exports, React, classnames_1, LoadMore_1, Refresh_1, before_1) {
     "use strict";
     Object.defineProperty(exports, "__esModule", { value: true });
     function isIphone() {

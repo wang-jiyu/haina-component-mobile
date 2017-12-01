@@ -1,18 +1,18 @@
 .spinner-refresh {
   text-align: center;
   position: relative;
-  height: 40px;
+  height: 0.4rem;
 }
 .spinner-refresh__animation {
   position: absolute;
-  bottom: 30px;
+  bottom: 0.3rem;
   width: 100%;
 }
 .spinner-refresh__text {
   position: absolute;
-  bottom: 10px;
+  bottom: 0.1rem;
   width: 100%;
-  font-size: 12px;
+  font-size: 0.12rem;
 }
 .spinner-refresh__loader,
 .spinner-refresh__loader:before,
@@ -27,7 +27,7 @@
 }
 .spinner-refresh__loader {
   color: #fc5359;
-  font-size: 10px;
+  font-size: 0.1rem;
   margin: 0 auto;
   position: relative;
   text-indent: -9999em;
