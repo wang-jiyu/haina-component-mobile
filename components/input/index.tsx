@@ -41,10 +41,6 @@ class Input extends React.Component<InputItemProps, any> {
         moneyKeyboardAlign: 'right',
     };
 
-    static contextTypes = {
-        antLocale: PropTypes.object,
-    };
-
     inputRef: any;
     private debounceTimeout: any;
     private scrollIntoViewTimeout: any;

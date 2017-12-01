@@ -25,9 +25,6 @@ declare class Input extends React.Component<InputItemProps, any> {
         updatePlaceholder: boolean;
         moneyKeyboardAlign: string;
     };
-    static contextTypes: {
-        antLocale: any;
-    };
     inputRef: any;
     private debounceTimeout;
     private scrollIntoViewTimeout;

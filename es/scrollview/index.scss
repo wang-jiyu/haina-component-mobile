@@ -1,0 +1,39 @@
+.haina-view-component {
+    overflow-y: scroll;
+    -webkit-overflow-scrolling: touch;
+    position: relative;
+  }
+  
+  .haina-view-component__refresh {
+    position: absolute;
+    left: 0;
+    width: 100%;
+    /* hide refresh component when scroll bouncing */
+    opacity: 0;
+  }
+  .haina-view-component__refresh.active {
+    opacity: 1;
+  }
+  
+  .ease-out-transion {
+    -webkit-transition: transform .2s ease-out;
+    -webkit-transition: -webkit-transform .2s ease-out;
+    transition: transform .2s ease-out;
+    transition: -webkit-transform .2s ease-out;
+  }
+  
+  /* local scroll can't scroll on ios */
+  .ios-local-scroll-fix:before {
+    content: "";
+    width: 1px;
+    float: left;
+    height: -webkit-calc(100% + 3px);
+    height: calc(100% + 3px);
+    margin-left: -1px;
+  }
+  
+  .ios-local-scroll-fix:after {
+    content: "";
+    width: 100%;
+    clear: both;
+  }

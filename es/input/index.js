@@ -7,7 +7,7 @@ var __rest = (this && this.__rest) || function (s, e) {
             t[p[i]] = s[p[i]];
     return t;
 };
-define(["require", "exports", "react", "prop-types", "classnames", "./Input", "rmc-feedback", "./index.scss"], function (require, exports, React, prop_types_1, classnames, Input_1, rmc_feedback_1) {
+define(["require", "exports", "react", "classnames", "./Input", "rmc-feedback", "./index.scss"], function (require, exports, React, classnames, Input_1, rmc_feedback_1) {
     "use strict";
     Object.defineProperty(exports, "__esModule", { value: true });
     function noop() { }
@@ -212,9 +212,6 @@ define(["require", "exports", "react", "prop-types", "classnames", "./Input", "r
         labelNumber: 5,
         updatePlaceholder: false,
         moneyKeyboardAlign: 'right',
-    };
-    Input.contextTypes = {
-        antLocale: prop_types_1.default.object,
     };
     exports.default = Input;
 });
