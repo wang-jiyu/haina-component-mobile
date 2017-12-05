@@ -1,5 +1,5 @@
 import * as React from 'react';
-import classNames from 'classnames';
+import * as classNames from 'classnames';
 import './index.scss';
 import IScrollViewProps from './PropsType'
 import LoadMore from './loadmore-component/LoadMore'

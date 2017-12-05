@@ -25,11 +25,11 @@
   /* local scroll can't scroll on ios */
   .ios-local-scroll-fix:before {
     content: "";
-    width: 1px;
+    width: 0.01rem;
     float: left;
-    height: -webkit-calc(100% + 3px);
-    height: calc(100% + 3px);
-    margin-left: -1px;
+    height: -webkit-calc(100% + 0.03rem);
+    height: calc(100% + 0.03rem);
+    margin-left: -0.01rem;
   }
   
   .ios-local-scroll-fix:after {

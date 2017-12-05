@@ -1,4 +1,4 @@
-define(["require", "exports", "react", "classnames", "./loadmore-component/LoadMore", "./refresh-component/Refresh", "./fn/before", "./index.scss"], function (require, exports, React, classnames_1, LoadMore_1, Refresh_1, before_1) {
+define(["require", "exports", "react", "classnames", "./loadmore-component/LoadMore", "./refresh-component/Refresh", "./fn/before", "./index.scss"], function (require, exports, React, classNames, LoadMore_1, Refresh_1, before_1) {
     "use strict";
     Object.defineProperty(exports, "__esModule", { value: true });
     function isIphone() {
@@ -35,7 +35,6 @@ define(["require", "exports", "react", "classnames", "./loadmore-component/LoadM
             this.setState({
                 topPosition: -this.refreshDom.clientHeight
             });
-            this.refresh(false);
             if (this.props.useWindowScroll) {
                 this.listendScroll(window);
             }
@@ -137,11 +136,9 @@ define(["require", "exports", "react", "classnames", "./loadmore-component/LoadM
         render() {
             const props = this.props;
             const state = this.state;
-            const { className } = props;
-            return (React.createElement("div", { className: classnames_1.default('haina-view-component', {
-                    className
-                }), ref: ref => this.rootDom = ref, onTouchStart: this.onTouchStart, onTouchEnd: this.onTouchEnd },
-                React.createElement("div", { ref: ref => this.refreshDom = ref, className: classnames_1.default('haina-view-component__refresh', {
+            const { height } = props;
+            return (React.createElement("div", { className: classNames('haina-view-component', props.className), ref: ref => this.rootDom = ref, onTouchStart: this.onTouchStart, onTouchEnd: this.onTouchEnd, style: { height: height } },
+                React.createElement("div", { ref: ref => this.refreshDom = ref, className: classNames('haina-view-component__refresh', {
                         'ease-out-transion': state.transition,
                         active: state.translateY > 0,
                     }), style: {
@@ -153,7 +150,7 @@ define(["require", "exports", "react", "classnames", "./loadmore-component/LoadM
                         isRefreshing: this.isRefreshing,
                         progress: this.progress
                     })),
-                React.createElement("div", { className: classnames_1.default('haina-view-component__content', {
+                React.createElement("div", { className: classNames('haina-view-component__content', {
                         'ease-out-transion': state.transition
                     }), style: {
                         transform: `translateY(${state.translateY}px)`,
