@@ -15,6 +15,12 @@ gulp.task('css', () => {
         .pipe(gulp.dest('es'));
 })
 
+
+gulp.task('libcss', () => {
+    return gulp.src(['components/**/*.scss'])
+        .pipe(gulp.dest('lib'));
+})
+
 //class模式
 gulp.task('es',['css'], function () {
     tsProj.options.target=2;
@@ -24,7 +30,7 @@ gulp.task('es',['css'], function () {
 });
 
 //var模式
-gulp.task('lib', function () {
+gulp.task('lib',['libcss'], function () {
     tsProj.options.target=1;
     return gulp.src('components/**/*{ts,tsx}')
         .pipe(ts(tsProj))

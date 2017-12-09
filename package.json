@@ -1,6 +1,6 @@
 {
   "name": "@com.haina.web/haina-component-mobile",
-  "version": "1.0.0",
+  "version": "1.0.3",
   "description": "mobile component",
   "main": "index.js",
   "scripts": {
@@ -21,6 +21,7 @@
     "rmc-feedback": "^1.0.3"
   },
   "devDependencies": {
+    "@types/es6-promise": "0.0.33",
     "@types/react": "^16.0.25",
     "@types/react-dom": "^16.0.3",
     "@types/react-router-dom": "^4.2.2",

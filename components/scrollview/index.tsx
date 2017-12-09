@@ -79,6 +79,10 @@ export default class ScrollView extends React.Component<IScrollViewProps, any> {
   }
 
 
+  componentWillUnmount(){
+    this.scrollTarget.removeEventListener('scroll', this.onScroll);
+  }
+
   isDragDown(prevY, curY) {
     return curY - prevY > 0;
   }
