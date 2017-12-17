@@ -1,231 +1,198 @@
 import * as React from 'react';
-import * as classNames from 'classnames';
 import './index.scss';
 import IScrollViewProps from './PropsType'
-import LoadMore from './loadmore-component/LoadMore'
-import Refresh from './refresh-component/Refresh'
-import before from './fn/before';
-
-
-function isIphone() {
-  return /iphone/i.test(window.navigator.userAgent);
-}
 
 export default class ScrollView extends React.Component<IScrollViewProps, any> {
 
   static defaultProps = {
-    threshold: 10,
-    useWindowScroll: false,
-    disableInfiniteScroll: false,
-    disableRefresh: false,
-    refresh: ():Promise<any>=>Promise.resolve(),
-    loadMore: ():Promise<any>=>Promise.resolve(),
-    refreshComponent: LoadMore,
-    loadMoreComponent: Refresh
+    element: 'div',
+    threshold: 250,
+    hasMore: false,
+    initialLoad: false,
+    pageStart: 0,
+    useWindow: true,
+    isReverse: false,
+    useCapture: false,
+    loader: null
   }
-  public startYPos: number = 0;
-  public prevYPos: number = 0;
-  public rootDom: any = null;
-  public refreshDom: any = null;
-  public scrollTarget: any = null;
-  public isRefreshing: any = true;
-  public isPulling: any = false;
 
 
   constructor(props) {
     super(props);
-    this.state = {
-      translateY: 0,
-      transition: false,
-      topPosition: 100,
-      isLoadingMore: false
-    };
-    function disableRefreshBefore() {
-      return !this.props.disableRefresh;
-    }
-    this.onTouchStart = before(disableRefreshBefore, this.onTouchStart).bind(this);
 
-    this.onTouchMove = before(disableRefreshBefore, this.onTouchMove).bind(this);
-
-    this.onTouchEnd = before(disableRefreshBefore, this.onTouchEnd).bind(this);
-
-    this.onScroll = before(function () {
-      return !this.props.disableInfiniteScroll;
-    }, this.onScroll).bind(this);
-
-
+    this.scrollListener = this.scrollListener.bind(this);
   }
-  // before(before, next) {
-  //   return function (...args) {
-  //     if (before.apply(this, args)) {
-  //       next.apply(this, args);
-  //     }
-  //   }
-  // }
+
+  private pageLoaded: number = 0
+  private defaultLoader: any = null
+  private scrollComponent: any
   componentDidMount() {
-    this.rootDom.addEventListener('touchmove', this.onTouchMove, false);
+    this.pageLoaded = this.props.pageStart;
+    this.attachScrollListener();
+  }
 
-    this.setState({
-      topPosition: -this.refreshDom.clientHeight
-    });
+  componentDidUpdate() {
+    this.attachScrollListener();
+  }
 
-    // this.refresh(false);
+  componentWillUnmount() {
+    this.detachScrollListener();
+    this.detachMousewheelListener();
+  }
 
-    if (this.props.useWindowScroll) {
-      this.listendScroll(window);
-    } else {
-      this.listendScroll(this.rootDom);
+  setDefaultLoader(loader) {
+    this.defaultLoader = loader;
+  }
+
+  detachMousewheelListener() {
+    let scrollEl = window;
+    if (this.props.useWindow === false) {
+      scrollEl = this.scrollComponent.parentNode;
     }
-  }
 
-
-  componentWillUnmount(){
-    this.scrollTarget.removeEventListener('scroll', this.onScroll);
-  }
-
-  isDragDown(prevY, curY) {
-    return curY - prevY > 0;
-  }
-  onTouchStart(e) {
-    this.startYPos = this.prevYPos = e.touches[0].pageY;
-  }
-
-  onTouchMove(e) {
-    if (this.isRefreshing) return;
-
-    const curYpos = e.touches[0].pageY;
-    const scrollTop = this.rootDom.scrollTop
-
-    if (
-      (scrollTop === 0 && this.isDragDown(this.prevYPos, curYpos)) || this.isPulling
-    ) {
-      e.preventDefault();
-      this.setState({
-        translateY: this.calcDistance(curYpos - this.startYPos),
-        transition: false
-      });
-      this.isPulling = true;
-    }
-    this.prevYPos = curYpos
-  }
-  onTouchEnd() {
-    if (this.isRefreshing) return;
-    if (this.shouldRefresh) {
-      this.refresh();
-    } else {
-      this.resetPosition();
-    }
-    this.isPulling = false;
-  }
-  onScroll() {
-    const state = this.state;
-    const props = this.props;
-    if (state.isLoadingMore) return;
-    if (this.arriveBottom()) {
-      this.setState({
-        isLoadingMore: true
-      });
-      props.loadMore()
-        .then(() => this.setState({
-          isLoadingMore: false
-        }));
-    }
-  }
-  arriveBottom() {
-    const props = this.props;
-    const target = this.scrollTarget;
-    const visibleHeight = props.useWindowScroll ? window.innerHeight : target.clientHeight;
-    const scrollTop = props.useWindowScroll ? window.pageYOffset : target.scrollTop;
-    const scrollHeight = props.useWindowScroll ? document.documentElement.scrollHeight : target.scrollHeight;
-    return (scrollHeight - (scrollTop + visibleHeight) <= props.threshold);
-  }
-  calcDistance(distance) {
-    return distance / 3;
-  }
-  get shouldRefresh() {
-    return this.state.translateY >= this.refreshDom.clientHeight;
-  }
-  get progress() {
-    if (this.refreshDom) {
-      return Math.min(this.state.translateY / this.refreshDom.clientHeight * 100, 100)
-    }
-    return 0;
-  }
-  refresh(transition = true) {
-    const props = this.props;
-    this.setState({
-      translateY: this.refreshDom.clientHeight,
-      transition
-    });
-
-    this.isRefreshing = true;
-    props
-      .refresh()
-      .then(() => {
-        this.resetPosition();
-        this.isRefreshing = false;
-      });
-  }
-  resetPosition() {
-    this.setState({
-      translateY: 0,
-      transition: true
-    });
-  }
-  listendScroll(target) {
-    this.scrollTarget = target;
-    target.addEventListener('scroll', this.onScroll);
-  }
-  render() {
-    const props = this.props;
-    const state = this.state;
-    const { height } = props
-    return (
-      <div
-        className={classNames('haina-view-component', props.className)}
-        ref={ref => this.rootDom = ref}
-        onTouchStart={this.onTouchStart}
-        onTouchEnd={this.onTouchEnd}
-        style={{height:height}}
-      >
-        <div
-          ref={ref => this.refreshDom = ref}
-          className={classNames('haina-view-component__refresh', {
-            'ease-out-transion': state.transition,
-            // show refresh component when not scroll bouncing
-            active: state.translateY > 0,
-          })}
-          style={{
-            transform: `translateY(${state.translateY}px)`,
-            WebkitTransform: `translateY(${state.translateY}px)`,
-            top: `${state.topPosition}px`
-          }}
-        >
-          {
-            props.disableRefresh ? null :
-              React.createElement(props.refreshComponent, {
-                isRefreshing: this.isRefreshing,
-                progress: this.progress
-              })
-          }
-        </div>
-
-        <div
-          className={classNames('haina-view-component__content', {
-            'ease-out-transion': state.transition
-          })}
-          style={{
-            transform: `translateY(${state.translateY}px)`,
-            WebkitTransform: `translateY(${state.translateY}px)`
-          }}
-        >
-          {props.children}
-          {
-            state.isLoadingMore ? React.createElement(props.loadMoreComponent) : null
-          }
-        </div>
-      </div>
+    scrollEl.removeEventListener(
+      'mousewheel',
+      this.mousewheelListener,
+      this.props.useCapture,
     );
+  }
+
+  detachScrollListener() {
+    let scrollEl = window;
+    if (this.props.useWindow === false) {
+      scrollEl = this.scrollComponent.parentNode;
+    }
+
+    scrollEl.removeEventListener(
+      'scroll',
+      this.scrollListener,
+      this.props.useCapture,
+    );
+    scrollEl.removeEventListener(
+      'resize',
+      this.scrollListener,
+      this.props.useCapture,
+    );
+  }
+
+  attachScrollListener() {
+    if (this.props.loading&&!this.props.hasMore) {
+      return;
+    }
+
+    let scrollEl = window;
+    if (this.props.useWindow === false) {
+      scrollEl = this.scrollComponent.parentNode;
+    }
+
+    scrollEl.addEventListener(
+      'mousewheel',
+      this.mousewheelListener,
+      this.props.useCapture,
+    );
+    scrollEl.addEventListener(
+      'scroll',
+      this.scrollListener,
+      this.props.useCapture,
+    );
+    scrollEl.addEventListener(
+      'resize',
+      this.scrollListener,
+      this.props.useCapture,
+    );
+
+    if (this.props.initialLoad) {
+      this.scrollListener();
+    }
+  }
+
+  mousewheelListener(e) {
+    if (e.deltaY === 1) {
+      e.preventDefault();
+    }
+  }
+
+  scrollListener() {
+    const el = this.scrollComponent;
+    const scrollEl = window;
+    const {LazyLoadArr} = this.props
+    let offset;
+    let lazyOffset;
+    if (this.props.useWindow) {
+      let doc =
+        document.documentElement;
+      doc = doc as any
+      const scrollTop =
+        scrollEl.pageYOffset !== undefined
+          ? scrollEl.pageYOffset
+          : doc.scrollTop;
+      if (this.props.isReverse) {
+        offset = scrollTop;
+      } else {
+        offset =
+          this.calculateTopPosition(el) +
+          (el.offsetHeight - scrollTop - window.innerHeight);
+      }
+      lazyOffset = scrollTop
+    } else if (this.props.isReverse) {
+      offset = el.parentNode.scrollTop;
+    } else {
+      offset =
+        el.scrollHeight - el.parentNode.scrollTop - el.parentNode.clientHeight;
+    }
+
+    if (offset < Number(this.props.threshold)) {
+      this.detachScrollListener();
+      if (typeof this.props.loadMore === 'function') {
+        this.props.loadMore((this.pageLoaded += 1));
+      }
+    }
+    
+    LazyLoadArr.forEach((item,index)=>{
+      const {ref,lazyload,threshold,loaded} = item
+      const elOffsetTop = ref.scrollTop
+      if((elOffsetTop-lazyOffset)<Number(threshold)&&!loaded){
+        this.detachScrollListener();
+        lazyload()
+      }
+    })
+  }
+
+  calculateTopPosition(el) {
+    if (!el) {
+      return 0;
+    }
+    return el.offsetTop + this.calculateTopPosition(el.offsetParent);
+  }
+
+  render() {
+    let {
+      children,
+      element,
+      hasMore,
+      initialLoad,
+      isReverse,
+      loader,
+      loadMore,
+      pageStart,
+      threshold,
+      useCapture,
+      useWindow,
+      className,
+      ...props
+    } = this.props;
+
+    const childrenArray = [children];
+    if (hasMore) {
+      if (loader) {
+        isReverse ? childrenArray.unshift(loader) : childrenArray.push(loader);
+      } else if (this.defaultLoader) {
+        isReverse
+          ? childrenArray.unshift(this.defaultLoader)
+          : childrenArray.push(this.defaultLoader);
+      }
+    }
+    return React.createElement(element,{className:className,ref:(ref)=>this.scrollComponent=ref},...childrenArray);
   }
 }
 

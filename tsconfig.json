@@ -1,7 +1,7 @@
 {
   "compilerOptions": {
-    "module": "amd",
     "target": "es6",
+    "lib": ["es5", "es6", "dom"],
     "allowJs": false,
     "declaration": true,
     "sourceMap": true,
@@ -24,7 +24,11 @@
     //    "noUnusedLocals": true,
     //    "strict": true,
     "jsx": "react",
-    "moduleResolution": "node"
+    "moduleResolution": "node",
+    "types": [
+      "react",
+      "react-dom"
+    ]
     //      "outDir": "./lib",//react报错
     //  "outFile": "ace-mobile.js"
   },
