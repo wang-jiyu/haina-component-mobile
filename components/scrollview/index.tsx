@@ -76,7 +76,10 @@ export default class ScrollView extends React.Component<IScrollViewProps, any> {
   }
 
   attachScrollListener() {
-    if (this.props.loading&&!this.props.hasMore) {
+    if(this.props.loading){
+      return;
+    }
+    if (!this.props.hasMore) {
       return;
     }
 

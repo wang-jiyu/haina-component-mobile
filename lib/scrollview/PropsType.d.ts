@@ -2,7 +2,7 @@ export interface ILazyLoad {
     ref: any;
     lazyload: Function;
     threshold: number;
-    loaded: false;
+    loaded: boolean;
 }
 export default interface IScrollViewProps {
     element?: string;
@@ -22,6 +22,7 @@ export default interface IScrollViewProps {
     className?: Array<string> | string | object;
     ref?: any;
     LazyLoadArr?: Array<ILazyLoad>;
+    loading?: boolean;
 }
 export interface IRefreshProps {
     isRefreshing: boolean;
