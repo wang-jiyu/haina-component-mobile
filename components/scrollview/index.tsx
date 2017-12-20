@@ -13,7 +13,8 @@ export default class ScrollView extends React.Component<IScrollViewProps, any> {
     useWindow: true,
     isReverse: false,
     useCapture: false,
-    loader: null
+    loader: null,
+    LazyLoadArr:[]
   }
 
 
