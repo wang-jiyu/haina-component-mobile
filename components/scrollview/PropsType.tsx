@@ -22,7 +22,6 @@ export default interface IScrollViewProps {
   isReverse?: boolean,
   className?: Array<string> | string | object,
   ref?: any,
-  LazyLoadArr?: Array<ILazyLoad>,
   loading?:boolean
 }
 

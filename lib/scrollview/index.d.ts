@@ -13,7 +13,6 @@ export default class ScrollView extends React.Component<IScrollViewProps, any> {
         isReverse: boolean;
         useCapture: boolean;
         loader: any;
-        LazyLoadArr: any[];
     };
     constructor(props: any);
     private pageLoaded;

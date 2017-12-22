@@ -1,7 +1,6 @@
 import * as React from 'react';
 import './index.scss';
 import IScrollViewProps from './PropsType'
-
 export default class ScrollView extends React.Component<IScrollViewProps, any> {
 
   static defaultProps = {
@@ -13,8 +12,7 @@ export default class ScrollView extends React.Component<IScrollViewProps, any> {
     useWindow: true,
     isReverse: false,
     useCapture: false,
-    loader: null,
-    LazyLoadArr:[]
+    loader: null
   }
 
 
@@ -119,7 +117,6 @@ export default class ScrollView extends React.Component<IScrollViewProps, any> {
   scrollListener() {
     const el = this.scrollComponent;
     const scrollEl = window;
-    const {LazyLoadArr} = this.props
     let offset;
     let lazyOffset;
     if (this.props.useWindow) {
@@ -151,15 +148,6 @@ export default class ScrollView extends React.Component<IScrollViewProps, any> {
         this.props.loadMore((this.pageLoaded += 1));
       }
     }
-    
-    LazyLoadArr.forEach((item,index)=>{
-      const {ref,lazyload,threshold,loaded} = item
-      const elOffsetTop = ref.scrollTop
-      if((elOffsetTop-lazyOffset)<Number(threshold)&&!loaded){
-        this.detachScrollListener();
-        lazyload()
-      }
-    })
   }
 
   calculateTopPosition(el) {
