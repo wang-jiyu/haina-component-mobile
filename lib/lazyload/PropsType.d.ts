@@ -10,4 +10,4 @@ export default interface ILazyLoad {
     debounce: number | boolean;
     placeholder: any;
     unmountIfInvisible: boolean;
-} 
+}

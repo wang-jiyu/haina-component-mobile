@@ -3,7 +3,6 @@ import PropTypes from 'prop-types';
 import * as classnames from 'classnames';
 import BasePropsType from './PropsType';
 import MyInput from './Input';
-import TouchFeedback from 'rmc-feedback';
 
 import './index.scss'
 
@@ -258,9 +257,7 @@ class Input extends React.Component<InputItemProps, any> {
                         )}
                     </div>
                     {clear && editable && !disabled && (value && `${value}`.length > 0) ?
-                        <TouchFeedback activeClassName={`${prefixCls}-clear-active`}>
-                            <div className={`${prefixCls}-clear`} onClick={this.clearInput} />
-                        </TouchFeedback>
+                        <div className={`${prefixCls}-clear`} onClick={this.clearInput} />
                         : null}
                     {error ? (<div className={`${prefixCls}-error-extra`} onClick={this.onErrorClick} />) : null}
                     {extra !== '' ? <div className={`${prefixCls}-extra`} onClick={this.onExtraClick}>{extra}</div> : null}
