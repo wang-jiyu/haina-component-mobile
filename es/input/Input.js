@@ -7,32 +7,29 @@ var __rest = (this && this.__rest) || function (s, e) {
             t[p[i]] = s[p[i]];
     return t;
 };
-define(["require", "exports", "react"], function (require, exports, React) {
-    "use strict";
-    Object.defineProperty(exports, "__esModule", { value: true });
-    class Input extends React.Component {
-        constructor() {
-            super(...arguments);
-            this.onInputBlur = (e) => {
-                const value = e.target.value;
-                if (this.props.onBlur) {
-                    this.props.onBlur(value);
-                }
-            };
-            this.onInputFocus = (e) => {
-                const value = e.target.value;
-                if (this.props.onFocus) {
-                    this.props.onFocus(value);
-                }
-            };
-            this.focus = () => {
-                this.inputRef.focus();
-            };
-        }
-        render() {
-            const _a = this.props, { onBlur, onFocus } = _a, others = __rest(_a, ["onBlur", "onFocus"]);
-            return (React.createElement("input", Object.assign({ ref: el => this.inputRef = el, onBlur: this.onInputBlur, onFocus: this.onInputFocus }, others)));
-        }
+import * as React from 'react';
+class Input extends React.Component {
+    constructor() {
+        super(...arguments);
+        this.onInputBlur = (e) => {
+            const value = e.target.value;
+            if (this.props.onBlur) {
+                this.props.onBlur(value);
+            }
+        };
+        this.onInputFocus = (e) => {
+            const value = e.target.value;
+            if (this.props.onFocus) {
+                this.props.onFocus(value);
+            }
+        };
+        this.focus = () => {
+            this.inputRef.focus();
+        };
     }
-    exports.default = Input;
-});
+    render() {
+        const _a = this.props, { onBlur, onFocus } = _a, others = __rest(_a, ["onBlur", "onFocus"]);
+        return (React.createElement("input", Object.assign({ ref: el => this.inputRef = el, onBlur: this.onInputBlur, onFocus: this.onInputFocus }, others)));
+    }
+}
+export default Input;

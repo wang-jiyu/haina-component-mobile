@@ -1,174 +1,138 @@
-define(["require", "exports", "react", "classnames", "./loadmore-component/LoadMore", "./refresh-component/Refresh", "./fn/before", "./index.scss"], function (require, exports, React, classNames, LoadMore_1, Refresh_1, before_1) {
-    "use strict";
-    Object.defineProperty(exports, "__esModule", { value: true });
-    function isIphone() {
-        return /iphone/i.test(window.navigator.userAgent);
+var __rest = (this && this.__rest) || function (s, e) {
+    var t = {};
+    for (var p in s) if (Object.prototype.hasOwnProperty.call(s, p) && e.indexOf(p) < 0)
+        t[p] = s[p];
+    if (s != null && typeof Object.getOwnPropertySymbols === "function")
+        for (var i = 0, p = Object.getOwnPropertySymbols(s); i < p.length; i++) if (e.indexOf(p[i]) < 0)
+            t[p[i]] = s[p[i]];
+    return t;
+};
+import * as React from 'react';
+import './index.scss';
+export default class ScrollView extends React.Component {
+    constructor(props) {
+        super(props);
+        this.pageLoaded = 0;
+        this.defaultLoader = null;
+        this.scrollListener = this.scrollListener.bind(this);
     }
-    class ScrollView extends React.Component {
-        constructor(props) {
-            super(props);
-            this.startYPos = 0;
-            this.prevYPos = 0;
-            this.rootDom = null;
-            this.refreshDom = null;
-            this.scrollTarget = null;
-            this.isRefreshing = true;
-            this.isPulling = false;
-            this.state = {
-                translateY: 0,
-                transition: false,
-                topPosition: 100,
-                isLoadingMore: false
-            };
-            function disableRefreshBefore() {
-                return !this.props.disableRefresh;
-            }
-            this.onTouchStart = before_1.default(disableRefreshBefore, this.onTouchStart).bind(this);
-            this.onTouchMove = before_1.default(disableRefreshBefore, this.onTouchMove).bind(this);
-            this.onTouchEnd = before_1.default(disableRefreshBefore, this.onTouchEnd).bind(this);
-            this.onScroll = before_1.default(function () {
-                return !this.props.disableInfiniteScroll;
-            }, this.onScroll).bind(this);
+    componentDidMount() {
+        this.pageLoaded = this.props.pageStart;
+        this.attachScrollListener();
+    }
+    componentDidUpdate() {
+        this.attachScrollListener();
+    }
+    componentWillUnmount() {
+        this.detachScrollListener();
+        this.detachMousewheelListener();
+    }
+    setDefaultLoader(loader) {
+        this.defaultLoader = loader;
+    }
+    detachMousewheelListener() {
+        let scrollEl = window;
+        if (this.props.useWindow === false) {
+            scrollEl = this.scrollComponent.parentNode;
         }
-        componentDidMount() {
-            this.rootDom.addEventListener('touchmove', this.onTouchMove, false);
-            this.setState({
-                topPosition: -this.refreshDom.clientHeight
-            });
-            if (this.props.useWindowScroll) {
-                this.listendScroll(window);
+        scrollEl.removeEventListener('mousewheel', this.mousewheelListener, this.props.useCapture);
+    }
+    detachScrollListener() {
+        let scrollEl = window;
+        if (this.props.useWindow === false) {
+            scrollEl = this.scrollComponent.parentNode;
+        }
+        scrollEl.removeEventListener('scroll', this.scrollListener, this.props.useCapture);
+        scrollEl.removeEventListener('resize', this.scrollListener, this.props.useCapture);
+    }
+    attachScrollListener() {
+        if (this.props.loading) {
+            return;
+        }
+        if (!this.props.hasMore) {
+            return;
+        }
+        let scrollEl = window;
+        if (this.props.useWindow === false) {
+            scrollEl = this.scrollComponent.parentNode;
+        }
+        scrollEl.addEventListener('mousewheel', this.mousewheelListener, this.props.useCapture);
+        scrollEl.addEventListener('scroll', this.scrollListener, this.props.useCapture);
+        scrollEl.addEventListener('resize', this.scrollListener, this.props.useCapture);
+        if (this.props.initialLoad) {
+            this.scrollListener();
+        }
+    }
+    mousewheelListener(e) {
+        if (e.deltaY === 1) {
+            e.preventDefault();
+        }
+    }
+    scrollListener() {
+        const el = this.scrollComponent;
+        const scrollEl = window;
+        let offset;
+        let lazyOffset;
+        if (this.props.useWindow) {
+            let doc = document.documentElement;
+            doc = doc;
+            const scrollTop = scrollEl.pageYOffset !== undefined
+                ? scrollEl.pageYOffset
+                : doc.scrollTop;
+            if (this.props.isReverse) {
+                offset = scrollTop;
             }
             else {
-                this.listendScroll(this.rootDom);
+                offset =
+                    this.calculateTopPosition(el) +
+                        (el.offsetHeight - scrollTop - window.innerHeight);
+            }
+            lazyOffset = scrollTop;
+        }
+        else if (this.props.isReverse) {
+            offset = el.parentNode.scrollTop;
+        }
+        else {
+            offset =
+                el.scrollHeight - el.parentNode.scrollTop - el.parentNode.clientHeight;
+        }
+        if (offset < Number(this.props.threshold)) {
+            this.detachScrollListener();
+            if (typeof this.props.loadMore === 'function') {
+                this.props.loadMore((this.pageLoaded += 1));
             }
         }
-        isDragDown(prevY, curY) {
-            return curY - prevY > 0;
-        }
-        onTouchStart(e) {
-            this.startYPos = this.prevYPos = e.touches[0].pageY;
-        }
-        onTouchMove(e) {
-            if (this.isRefreshing)
-                return;
-            const curYpos = e.touches[0].pageY;
-            const scrollTop = this.rootDom.scrollTop;
-            if ((scrollTop === 0 && this.isDragDown(this.prevYPos, curYpos)) || this.isPulling) {
-                e.preventDefault();
-                this.setState({
-                    translateY: this.calcDistance(curYpos - this.startYPos),
-                    transition: false
-                });
-                this.isPulling = true;
-            }
-            this.prevYPos = curYpos;
-        }
-        onTouchEnd() {
-            if (this.isRefreshing)
-                return;
-            if (this.shouldRefresh) {
-                this.refresh();
-            }
-            else {
-                this.resetPosition();
-            }
-            this.isPulling = false;
-        }
-        onScroll() {
-            const state = this.state;
-            const props = this.props;
-            if (state.isLoadingMore)
-                return;
-            if (this.arriveBottom()) {
-                this.setState({
-                    isLoadingMore: true
-                });
-                props.loadMore()
-                    .then(() => this.setState({
-                    isLoadingMore: false
-                }));
-            }
-        }
-        arriveBottom() {
-            const props = this.props;
-            const target = this.scrollTarget;
-            const visibleHeight = props.useWindowScroll ? window.innerHeight : target.clientHeight;
-            const scrollTop = props.useWindowScroll ? window.pageYOffset : target.scrollTop;
-            const scrollHeight = props.useWindowScroll ? document.documentElement.scrollHeight : target.scrollHeight;
-            return (scrollHeight - (scrollTop + visibleHeight) <= props.threshold);
-        }
-        calcDistance(distance) {
-            return distance / 3;
-        }
-        get shouldRefresh() {
-            return this.state.translateY >= this.refreshDom.clientHeight;
-        }
-        get progress() {
-            if (this.refreshDom) {
-                return Math.min(this.state.translateY / this.refreshDom.clientHeight * 100, 100);
-            }
+    }
+    calculateTopPosition(el) {
+        if (!el) {
             return 0;
         }
-        refresh(transition = true) {
-            const props = this.props;
-            this.setState({
-                translateY: this.refreshDom.clientHeight,
-                transition
-            });
-            this.isRefreshing = true;
-            props
-                .refresh()
-                .then(() => {
-                this.resetPosition();
-                this.isRefreshing = false;
-            });
-        }
-        resetPosition() {
-            this.setState({
-                translateY: 0,
-                transition: true
-            });
-        }
-        listendScroll(target) {
-            this.scrollTarget = target;
-            target.addEventListener('scroll', this.onScroll);
-        }
-        render() {
-            const props = this.props;
-            const state = this.state;
-            const { height } = props;
-            return (React.createElement("div", { className: classNames('haina-view-component', props.className), ref: ref => this.rootDom = ref, onTouchStart: this.onTouchStart, onTouchEnd: this.onTouchEnd, style: { height: height } },
-                React.createElement("div", { ref: ref => this.refreshDom = ref, className: classNames('haina-view-component__refresh', {
-                        'ease-out-transion': state.transition,
-                        active: state.translateY > 0,
-                    }), style: {
-                        transform: `translateY(${state.translateY}px)`,
-                        WebkitTransform: `translateY(${state.translateY}px)`,
-                        top: `${state.topPosition}px`
-                    } }, props.disableRefresh ? null :
-                    React.createElement(props.refreshComponent, {
-                        isRefreshing: this.isRefreshing,
-                        progress: this.progress
-                    })),
-                React.createElement("div", { className: classNames('haina-view-component__content', {
-                        'ease-out-transion': state.transition
-                    }), style: {
-                        transform: `translateY(${state.translateY}px)`,
-                        WebkitTransform: `translateY(${state.translateY}px)`
-                    } },
-                    props.children,
-                    state.isLoadingMore ? React.createElement(props.loadMoreComponent) : null)));
-        }
+        return el.offsetTop + this.calculateTopPosition(el.offsetParent);
     }
-    ScrollView.defaultProps = {
-        threshold: 10,
-        useWindowScroll: false,
-        disableInfiniteScroll: false,
-        disableRefresh: false,
-        refresh: () => Promise.resolve(),
-        loadMore: () => Promise.resolve(),
-        refreshComponent: LoadMore_1.default,
-        loadMoreComponent: Refresh_1.default
-    };
-    exports.default = ScrollView;
-});
+    render() {
+        let _a = this.props, { children, element, hasMore, initialLoad, isReverse, loader, loadMore, pageStart, threshold, useCapture, useWindow, className } = _a, props = __rest(_a, ["children", "element", "hasMore", "initialLoad", "isReverse", "loader", "loadMore", "pageStart", "threshold", "useCapture", "useWindow", "className"]);
+        const childrenArray = [children];
+        if (hasMore) {
+            if (loader) {
+                isReverse ? childrenArray.unshift(loader) : childrenArray.push(loader);
+            }
+            else if (this.defaultLoader) {
+                isReverse
+                    ? childrenArray.unshift(this.defaultLoader)
+                    : childrenArray.push(this.defaultLoader);
+            }
+        }
+        return React.createElement(element, { className: className, ref: (ref) => this.scrollComponent = ref }, ...childrenArray);
+    }
+}
+ScrollView.defaultProps = {
+    element: 'div',
+    threshold: 250,
+    hasMore: false,
+    initialLoad: false,
+    pageStart: 0,
+    useWindow: true,
+    isReverse: false,
+    useCapture: false,
+    loader: null
+};

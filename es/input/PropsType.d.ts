@@ -2,6 +2,7 @@
 import * as React from 'react';
 interface InputProps {
     style?: any;
+    /** web only */
     moneyKeyboardAlign?: string;
     onClick?: Function;
     type?: 'text' | 'bankCard' | 'phone' | 'password' | 'number' | 'idcard' | 'digit' | 'money';
