@@ -42,7 +42,8 @@
   "exclude": [
     "node_modules",
     "lib",
-    "es"
+    "es",
+    "src"
   ],
   "atom": {
     "rewriteTsconfig": false,
