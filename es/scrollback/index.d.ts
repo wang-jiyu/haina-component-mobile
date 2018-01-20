@@ -1,6 +1,7 @@
 /// <reference types="react" />
 import * as React from 'react';
-export default class ScrollBack extends React.Component<any, any> {
+import ILazyLoad from './PropsTypes';
+export default class ScrollBack extends React.Component<ILazyLoad, any> {
     static defaultProps: {
         offset: number;
         overflow: boolean;
@@ -9,7 +10,5 @@ export default class ScrollBack extends React.Component<any, any> {
         loaded: boolean;
     };
     constructor(props: any);
-    componentDidMount(): void;
-    componentWillReceiveProps(nextProps: any): void;
     render(): JSX.Element;
 }

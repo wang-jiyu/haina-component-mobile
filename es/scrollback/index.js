@@ -1,6 +1,6 @@
 import * as React from 'react';
 import LazyLoad from 'react-lazyload';
-export default class ScrollBack extends React.Component {
+class ScrollBackItem extends React.Component {
     constructor(props) {
         super(props);
     }
@@ -17,8 +17,17 @@ export default class ScrollBack extends React.Component {
         }
     }
     render() {
-        const { offset, overflow, resize, scroll } = this.props;
-        return (React.createElement(LazyLoad, { offset: offset, overflow: overflow, resize: resize, scroll: scroll }, this.props.children));
+        return (this.props.children);
+    }
+}
+export default class ScrollBack extends React.Component {
+    constructor(props) {
+        super(props);
+    }
+    render() {
+        const { offset, overflow, resize, scroll, loaded, callback, height } = this.props;
+        return (React.createElement(LazyLoad, { height: height, offset: offset, overflow: overflow, resize: resize, scroll: scroll },
+            React.createElement(ScrollBackItem, { loaded: loaded, callback: callback }, this.props.children)));
     }
 }
 ScrollBack.defaultProps = {
