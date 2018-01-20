@@ -1,3 +1,12 @@
+var __rest = (this && this.__rest) || function (s, e) {
+    var t = {};
+    for (var p in s) if (Object.prototype.hasOwnProperty.call(s, p) && e.indexOf(p) < 0)
+        t[p] = s[p];
+    if (s != null && typeof Object.getOwnPropertySymbols === "function")
+        for (var i = 0, p = Object.getOwnPropertySymbols(s); i < p.length; i++) if (e.indexOf(p[i]) < 0)
+            t[p[i]] = s[p[i]];
+    return t;
+};
 import * as React from 'react';
 import * as classNames from 'classnames';
 import './index.scss';
@@ -54,11 +63,11 @@ export default class Tabs extends React.PureComponent {
         const { tabClassName, tabFontClassName, tabBarUnderlineStyle, tabBarActiveTextColor, tabBarInactiveTextColor } = this.props;
         const $menuItems = this.getChildrens()
             .map(($panel, index) => {
-            const title = $panel.title;
+            const { title } = $panel, other = __rest($panel, ["title"]);
             const ref = `tab-menu-${index + 1}`;
             const classes = classNames('tabs-menu-item', this.state.tabActive === (index + 1) && !tabBarUnderlineStyle && 'is-active', this.state.tabActive === (index + 1) && tabBarUnderlineStyle);
             const fontClass = classNames(tabFontClassName);
-            return (React.createElement("div", { ref: ref, key: index, className: classes, onClick: () => this.setActive(index + 1) },
+            return (React.createElement("div", Object.assign({ ref: ref, key: index, className: classes, onClick: () => this.setActive(index + 1) }, other),
                 React.createElement("span", { className: fontClass, style: { color: this.state.tabActive === (index + 1) ? tabBarActiveTextColor : tabBarInactiveTextColor } }, title)));
         });
         const classes = classNames('tabs-navigation', tabClassName);

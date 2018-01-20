@@ -69,7 +69,7 @@ export default class Tabs extends React.PureComponent<TabsProps, any> {
         const {tabClassName,tabFontClassName,tabBarUnderlineStyle,tabBarActiveTextColor,tabBarInactiveTextColor} = this.props
         const $menuItems = this.getChildrens()
             .map(($panel, index) => {
-                const title = $panel.title;
+                const {title,...other} = $panel;
                 const ref = `tab-menu-${index + 1}`;
                 
                 const classes = classNames(
@@ -81,7 +81,7 @@ export default class Tabs extends React.PureComponent<TabsProps, any> {
                     tabFontClassName
                 );
                 return (
-                    <div ref={ref} key={index} className={classes} onClick={() => this.setActive(index + 1)}>
+                    <div ref={ref} key={index} className={classes} onClick={() => this.setActive(index + 1)} {...other}>
                         <span className={fontClass} style={{color:this.state.tabActive === (index + 1)?tabBarActiveTextColor:tabBarInactiveTextColor}}>
                             {title}
                         </span>
