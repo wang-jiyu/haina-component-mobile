@@ -1,17 +1,16 @@
-.haina-dialog {
+.haina-dialog-container {
     .haina-dialog-mask {
       position: fixed;
       top: 0;
       right: 0;
       left: 0;
       bottom: 0;
-      background-color: rgb(55, 55, 55);
-      background-color: rgba(55, 55, 55, 0.6);
+      background-color: rgba(0, 0, 0, 0.4);
       height: 100%;
       filter: alpha(opacity=50);
       z-index: 1050;
   
-      .haina-dialog-hidden {
+      .haina-dialog-mask-hidden {
         display: none;
       }
     }
