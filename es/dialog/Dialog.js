@@ -25,7 +25,7 @@ export default class Dialog extends React.Component {
                     React.createElement("span", { className: `${prefixCls}-close-x` })));
             }
             const transitionName = this.getTransitionName();
-            const dialogElement = (React.createElement(LazyRenderBox, { key: "dialog-element", role: "document", ref: el => this.dialogRef = el, style: props.style || {}, className: `${props.className || ''}`, visible: props.visible },
+            const dialogElement = (React.createElement(LazyRenderBox, { key: "dialog-element", role: "document", ref: el => this.dialogRef = el, style: props.style || {}, className: `${props.dialogclassName || ''}`, visible: props.visible },
                 React.createElement("div", { className: `${prefixCls}-content` },
                     closer,
                     header,
@@ -126,7 +126,7 @@ export default class Dialog extends React.Component {
 }
 Dialog.defaultProps = {
     afterClose: noop,
-    className: '',
+    dialogclassName: 'haina-dialog-document',
     mask: true,
     visible: false,
     closable: false,

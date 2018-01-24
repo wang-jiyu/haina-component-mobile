@@ -4,7 +4,7 @@ import IDialogPropTypes from './IDialogPropTypes';
 export default class Dialog extends React.Component<IDialogPropTypes, any> {
     static defaultProps: {
         afterClose: () => void;
-        className: string;
+        dialogclassName: string;
         mask: boolean;
         visible: boolean;
         closable: boolean;
