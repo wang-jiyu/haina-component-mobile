@@ -1,7 +1,7 @@
 /// <reference types="react" />
 import * as React from 'react';
 interface IDialogPropTypes {
-    className?: string;
+    dialogclassName?: string;
     style?: {};
     mask?: boolean;
     children?: any;

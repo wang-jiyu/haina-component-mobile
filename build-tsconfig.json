@@ -26,7 +26,6 @@
   },
   "buildOnSave": false,
   "compileOnSave": true,
-  "typeRoots" : ["node_modules/@types"],
   "filesGlob": [
     "./typings/**/*.ts",
     "./**/*.ts",

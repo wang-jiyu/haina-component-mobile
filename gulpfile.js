@@ -2,7 +2,9 @@ var gulp = require('gulp');
 var ts = require('gulp-typescript');
 var runSequence = require('run-sequence');
 var rename = require('gulp-rename');
-var tsProj = ts.createProject('build-tsconfig.json');
+var tsProj = ts.createProject('./build-tsconfig.json',{
+    removeComments:false
+});
 
 gulp.task('css', () => {
     return gulp.src(['components/**/*.scss'])
@@ -27,7 +29,7 @@ gulp.task('es',['css'], function () {
 gulp.task('lib',['libcss'], function () {
     tsProj.options.target=1;
     return gulp.src('components/**/*{ts,tsx}')
-        .pipe(ts(tsProj))
+        .pipe(tsProj())
         .pipe(gulp.dest('lib'));
 });
  
