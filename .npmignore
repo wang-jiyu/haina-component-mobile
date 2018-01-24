@@ -4,3 +4,10 @@
 tsconfig.json
 package-lock.json
 .gitignore
+/build
+/config
+/src
+.babelrc
+dev-tsconfig.json
+index.html
+postcss.config.js

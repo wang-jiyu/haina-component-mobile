@@ -1,19 +1,19 @@
-import * as React from 'react';
-import * as ReactDOM from 'react-dom';
-import Dialog from './Dialog';
-import IDialogPropTypes from './IDialogPropTypes';
+import * as React from 'react'
+import * as ReactDOM from 'react-dom'
+import Dialog from './Dialog'
+import IDialogPropTypes from './IDialogPropTypes'
 import './dialog.scss'
 import './mask.scss'
 function noop() {
 }
 
-const IS_REACT_16 = !!(ReactDOM as any).createPortal;
+const IS_REACT_16 = true
 
-export default class DialogWrap extends React.Component<IDialogPropTypes, any> {
+class DialogWrap extends React.Component<IDialogPropTypes, any> {
   static defaultProps = {
     visible: false,
     prefixCls: 'haina-dialog',
-    onClose: noop,
+    onClose: noop
   };
 
   _component: any;
@@ -81,6 +81,7 @@ export default class DialogWrap extends React.Component<IDialogPropTypes, any> {
       const container = document.createElement('div');
       const containerId = `${this.props.prefixCls}-container-${(new Date().getTime())}`;
       container.setAttribute('id', containerId);
+      container.setAttribute("class",`${this.props.prefixCls}-container`)
       document.body.appendChild(container);
       this.container = container;
     }
@@ -103,3 +104,5 @@ export default class DialogWrap extends React.Component<IDialogPropTypes, any> {
     return (null as any);
   }
 }
+
+export default DialogWrap;

@@ -1,7 +1,7 @@
 import * as React from 'react'
 import * as ReactDOM from 'react-dom'
 import App from './App'
-import AppContainer from 'react-hot-loader'
+import {AppContainer} from 'react-hot-loader'
 
 export class Root {
   public constructor() {
@@ -13,7 +13,7 @@ export class Root {
           <AppContainer>
               <App/>
           </AppContainer>,
-          document.getElementById('example')
+          document.getElementById('root')
       );
   }
 
@@ -23,5 +23,5 @@ export class Root {
 new Root();
 
 // if (module.hot) {
-//   module.hot.accept('./App', () => render(App))
-// }
+//     module.hot.accept('./App', () => render(App))
+//   }

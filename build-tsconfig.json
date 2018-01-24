@@ -3,7 +3,7 @@
     "target": "es5",
     "lib": ["es5", "es6", "dom"],
     "allowJs": false,
-    "declaration": false,
+    "declaration": true,
     "sourceMap": true,
     "noLib": false,
     "noImplicitAny": false,
@@ -12,28 +12,21 @@
     "suppressImplicitAnyIndexErrors": true,
     "emitDecoratorMetadata": true,
     "experimentalDecorators": true,
-    //    "alwaysStrict":true,//以严格模式解析并为每个源文件生成"use strict"语句
-    "noImplicitUseStrict": false, //模块输出中不包含'use strict'指令。
+    "noImplicitUseStrict": false,
     "skipDefaultLibCheck": true,
     "noImplicitReturns": true,
     "noFallthroughCasesInSwitch": true,
-    //    "strictNullChecks": true,
-    //    "noImplicitThis": false,//
     "forceConsistentCasingInFileNames": true,
-    //    "noUnusedParameters": true,
-    //    "noUnusedLocals": true,
-    //    "strict": true,
     "jsx": "react",
     "moduleResolution": "node",
     "types": [
       "react",
       "react-dom"
     ]
-    //      "outDir": "./lib",//react报错
-    //  "outFile": "ace-mobile.js"
   },
   "buildOnSave": false,
   "compileOnSave": true,
+  "typeRoots" : ["node_modules/@types"],
   "filesGlob": [
     "./typings/**/*.ts",
     "./**/*.ts",

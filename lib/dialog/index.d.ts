@@ -3,7 +3,7 @@ import * as React from 'react';
 import IDialogPropTypes from './IDialogPropTypes';
 import './dialog.scss';
 import './mask.scss';
-export default class DialogWrap extends React.Component<IDialogPropTypes, any> {
+declare class DialogWrap extends React.Component<IDialogPropTypes, any> {
     static defaultProps: {
         visible: boolean;
         prefixCls: string;
@@ -24,3 +24,4 @@ export default class DialogWrap extends React.Component<IDialogPropTypes, any> {
     renderDialog(visible: any): void;
     render(): any;
 }
+export default DialogWrap;

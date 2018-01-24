@@ -2,7 +2,7 @@ var gulp = require('gulp');
 var ts = require('gulp-typescript');
 var runSequence = require('run-sequence');
 var rename = require('gulp-rename');
-var tsProj = ts.createProject('tsconfig.json');
+var tsProj = ts.createProject('build-tsconfig.json');
 
 gulp.task('css', () => {
     return gulp.src(['components/**/*.scss'])

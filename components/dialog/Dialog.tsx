@@ -12,7 +12,7 @@ export default class Dialog extends React.Component<IDialogPropTypes, any> {
     className: '',
     mask: true,
     visible: false,
-    closable: true,
+    closable: false,
     maskClosable: false,
     prefixCls: 'haina-dialog',
     onClose: noop,
@@ -148,7 +148,7 @@ export default class Dialog extends React.Component<IDialogPropTypes, any> {
         role="document"
         ref={el => this.dialogRef = el}
         style={props.style || {}}
-        className={`${prefixCls} ${props.className || ''}`}
+        className={`${props.className || ''}`}
         visible={props.visible}
       >
         <div className={`${prefixCls}-content`}>

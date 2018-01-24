@@ -1,21 +1,20 @@
-.haina-dialog {
-    &-mask {
+.haina-dialog-container {
+    .haina-dialog-mask {
       position: fixed;
       top: 0;
       right: 0;
       left: 0;
       bottom: 0;
-      background-color: rgb(55, 55, 55);
-      background-color: rgba(55, 55, 55, 0.6);
+      background-color: rgba(0, 0, 0, 0.4);
       height: 100%;
       filter: alpha(opacity=50);
       z-index: 1050;
   
-      &-hidden {
+      .haina-dialog-mask-hidden {
         display: none;
       }
     }
-    &-fade-enter,&-fade-appear {
+    .haina-dialog-fade-enter,.haina-dialog-fade-appear {
       opacity: 0;
       animation-duration: 0.3s;
       animation-fill-mode: both;
@@ -23,19 +22,19 @@
       animation-play-state: paused;
     }
   
-    &-fade-leave {
+    .haina-dialog-fade-leave {
       animation-duration: 0.3s;
       animation-fill-mode: both;
       animation-timing-function: cubic-bezier(0.55, 0, 0.55, 0.2);
       animation-play-state: paused;
     }
   
-    &-fade-enter&-fade-enter-active,&-fade-appear&-fade-appear-active  {
+    .haina-dialog-fade-enter.haina-dialog-fade-enter-active,.haina-dialog-fade-appear.haina-dialog-fade-appear-active  {
       animation-name: rcDialogFadeIn;
       animation-play-state: running;
     }
   
-    &-fade-leave&-fade-leave-active {
+    .haina-dialog-fade-leave.haina-dialog-fade-leave-active {
       animation-name: rcDialogFadeOut;
       animation-play-state: running;
     }

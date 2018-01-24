@@ -1,5 +1,5 @@
 /// <reference types="react" />
-import { ReactNode } from 'react';
+import * as React from 'react';
 interface IDialogPropTypes {
     className?: string;
     style?: {};
@@ -10,8 +10,8 @@ interface IDialogPropTypes {
     closable?: boolean;
     maskClosable?: boolean;
     visible?: boolean;
-    title?: ReactNode;
-    footer?: ReactNode;
+    title?: React.ReactNode;
+    footer?: React.ReactNode;
     transitionName?: string;
     maskTransitionName?: string;
     animation?: any;

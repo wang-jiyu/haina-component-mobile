@@ -1,5 +1,4 @@
-import { ReactNode } from 'react';
-
+import * as React from 'react';
 interface IDialogPropTypes {
   className?: string;//对话框的class
   style?: {};//对话框的内联样式
@@ -7,11 +6,11 @@ interface IDialogPropTypes {
   children?: any;
   afterClose?: () => void;//关闭之后的回调
   onClose?: (e: any) => void;//关闭
-  closable?: boolean;//是否可以关闭默认true
+  closable?: boolean;//是否显示关闭按钮
   maskClosable?: boolean;//mask点击是否可以关闭,默认false
   visible?: boolean;//控制是否显示
-  title?: ReactNode;//title
-  footer?: ReactNode;//footer
+  title?: React.ReactNode;//title
+  footer?: React.ReactNode;//footer
   transitionName?: string;// ReactCSSTransitionGroup 过度效果
   maskTransitionName?: string;// ReactCSSTransitionGroup
   animation?: any;//默认时zooms，可自定义缩放的动画clas

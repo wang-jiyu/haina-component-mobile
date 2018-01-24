@@ -5,8 +5,8 @@ import './dialog.scss';
 import './mask.scss';
 function noop() {
 }
-const IS_REACT_16 = !!ReactDOM.createPortal;
-export default class DialogWrap extends React.Component {
+const IS_REACT_16 = true;
+class DialogWrap extends React.Component {
     constructor() {
         super(...arguments);
         this.saveRef = (node) => {
@@ -84,5 +84,6 @@ export default class DialogWrap extends React.Component {
 DialogWrap.defaultProps = {
     visible: false,
     prefixCls: 'haina-dialog',
-    onClose: noop,
+    onClose: noop
 };
+export default DialogWrap;

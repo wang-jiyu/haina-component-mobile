@@ -1,5 +1,6 @@
-import Home from '../views/home'
-import ScrollCall from '../views/scrollcall/ScrollCall'
+import Imported from 'react-imported-component'
+const Home = Imported(() => import('../views/home'))
+const ScrollCall = Imported(() => import('../views/scrollcall/ScrollCall'))
 export default [
   {
     path: '/',
