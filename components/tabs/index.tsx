@@ -67,7 +67,7 @@ export default class Tabs extends React.PureComponent<TabsProps, any> {
         if (!this.props.children) {
             throw new Error('必须包含一个子元素');
         }
-        const { tabClassName, tabFontClassName, tabBarUnderlineStyle, tabBarActiveTextColor, tabBarInactiveTextColor } = this.props
+        const { tabClassName,tabMenuClassName,tabFontClassName, tabBarUnderlineStyle, tabBarActiveTextColor, tabBarInactiveTextColor } = this.props
         const $menuItems = this.getChildrens()
             .map(($panel, index) => {
                 const { title, ...other } = $panel;
@@ -90,9 +90,10 @@ export default class Tabs extends React.PureComponent<TabsProps, any> {
                 );
             });
         const classes = classNames('tabs-navigation', tabClassName)
+        const tabMenuClass = classNames('tabs-menu', tabMenuClassName)
         return (
             <div className={classes}>
-                <div className='tabs-menu'>{$menuItems}</div>
+                <div className={tabMenuClass}>{$menuItems}</div>
             </div>
         );
     }
