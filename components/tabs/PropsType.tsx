@@ -12,7 +12,8 @@ export  interface TabsProps {
     tabFontClassName?:Array<string>|string|object,
     tabBarUnderlineStyle?:Array<string>|string|object,
     tabBarActiveTextColor?:Array<string>|string|object,
-    tabBarInactiveTextColor?:Array<string>|string|object
+    tabBarInactiveTextColor?:Array<string>|string|object,
+    allShowMode?:boolean
 };
 
 export  interface TabItemProps {

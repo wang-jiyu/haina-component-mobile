@@ -1,7 +1,7 @@
 import * as React from 'react';
 import { TabsProps, TabItemProps } from './PropsType';
 import * as classNames from 'classnames'
-import  './index.scss'
+import './index.scss'
 
 export class Item extends React.Component<TabItemProps, any>{
     render() {
@@ -16,6 +16,7 @@ export default class Tabs extends React.PureComponent<TabsProps, any> {
 
     static defaultProps = {
         tabActive: 1,
+        allShowMode: false
     };
 
     constructor(props) {
@@ -66,29 +67,29 @@ export default class Tabs extends React.PureComponent<TabsProps, any> {
         if (!this.props.children) {
             throw new Error('必须包含一个子元素');
         }
-        const {tabClassName,tabFontClassName,tabBarUnderlineStyle,tabBarActiveTextColor,tabBarInactiveTextColor} = this.props
+        const { tabClassName, tabFontClassName, tabBarUnderlineStyle, tabBarActiveTextColor, tabBarInactiveTextColor } = this.props
         const $menuItems = this.getChildrens()
             .map(($panel, index) => {
-                const {title,...other} = $panel;
+                const { title, ...other } = $panel;
                 const ref = `tab-menu-${index + 1}`;
-                
+
                 const classes = classNames(
                     'tabs-menu-item',
                     this.state.tabActive === (index + 1) && !tabBarUnderlineStyle && 'is-active',
-                    this.state.tabActive === (index + 1) &&  tabBarUnderlineStyle
+                    this.state.tabActive === (index + 1) && tabBarUnderlineStyle
                 );
                 const fontClass = classNames(
                     tabFontClassName
                 );
                 return (
                     <div ref={ref} key={index} className={classes} onClick={() => this.setActive(index + 1)} {...other}>
-                        <span className={fontClass} style={{color:this.state.tabActive === (index + 1)?tabBarActiveTextColor:tabBarInactiveTextColor}}>
+                        <span className={fontClass} style={{ color: this.state.tabActive === (index + 1) ? tabBarActiveTextColor : tabBarInactiveTextColor }}>
                             {title}
                         </span>
                     </div>
                 );
             });
-        const classes = classNames('tabs-navigation',tabClassName)
+        const classes = classNames('tabs-navigation', tabClassName)
         return (
             <div className={classes}>
                 <div className='tabs-menu'>{$menuItems}</div>
@@ -98,7 +99,15 @@ export default class Tabs extends React.PureComponent<TabsProps, any> {
     _getSelectedPanel() {
         var index = this.state.tabActive - 1;
         var $panel = this.props.children[index];
-
+        if (this.props.allShowMode) {
+            return (
+                React.Children.map(this.props.children, (child,subindex) => {
+                    return <div ref='tab-panel' className='tab-panel' style={{display:subindex===index?'block':'none'}}>
+                        {child}
+                    </div>
+                })
+            )
+        }
         return (
             <div ref='tab-panel' className='tab-panel'>
                 {$panel}
