@@ -9,6 +9,7 @@ export default class Tabs extends React.PureComponent<TabsProps, any> {
     static Item: typeof Item;
     static defaultProps: {
         tabActive: number;
+        allShowMode: boolean;
     };
     constructor(props: any);
     componentDidMount(): void;
@@ -19,6 +20,6 @@ export default class Tabs extends React.PureComponent<TabsProps, any> {
     }[];
     setActive(index: number, e?: any): void;
     _getMenuItems(): JSX.Element;
-    _getSelectedPanel(): JSX.Element;
+    _getSelectedPanel(): JSX.Element | JSX.Element[];
     render(): JSX.Element;
 }

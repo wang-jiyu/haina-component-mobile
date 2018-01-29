@@ -60,7 +60,7 @@ export default class Tabs extends React.PureComponent {
         if (!this.props.children) {
             throw new Error('必须包含一个子元素');
         }
-        const { tabClassName, tabFontClassName, tabBarUnderlineStyle, tabBarActiveTextColor, tabBarInactiveTextColor } = this.props;
+        const { tabClassName, tabMenuClassName, tabFontClassName, tabBarUnderlineStyle, tabBarActiveTextColor, tabBarInactiveTextColor } = this.props;
         const $menuItems = this.getChildrens()
             .map(($panel, index) => {
             const { title } = $panel, other = __rest($panel, ["title"]);
@@ -71,12 +71,18 @@ export default class Tabs extends React.PureComponent {
                 React.createElement("span", { className: fontClass, style: { color: this.state.tabActive === (index + 1) ? tabBarActiveTextColor : tabBarInactiveTextColor } }, title)));
         });
         const classes = classNames('tabs-navigation', tabClassName);
+        const tabMenuClass = classNames('tabs-menu', tabMenuClassName);
         return (React.createElement("div", { className: classes },
-            React.createElement("div", { className: 'tabs-menu' }, $menuItems)));
+            React.createElement("div", { className: tabMenuClass }, $menuItems)));
     }
     _getSelectedPanel() {
         var index = this.state.tabActive - 1;
         var $panel = this.props.children[index];
+        if (this.props.allShowMode) {
+            return (React.Children.map(this.props.children, (child, subindex) => {
+                return React.createElement("div", { ref: 'tab-panel', className: 'tab-panel', style: { display: subindex === index ? 'block' : 'none' } }, child);
+            }));
+        }
         return (React.createElement("div", { ref: 'tab-panel', className: 'tab-panel' }, $panel));
     }
     render() {
@@ -89,4 +95,5 @@ export default class Tabs extends React.PureComponent {
 Tabs.Item = Item;
 Tabs.defaultProps = {
     tabActive: 1,
+    allShowMode: false
 };

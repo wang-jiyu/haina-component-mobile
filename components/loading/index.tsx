@@ -2,7 +2,7 @@
 
 import * as React from 'react'
 import './loading.scss'
-interface ILoadingProps {
+export interface ILoadingProps {
     size?: number
 }
 export default class Loading extends React.Component<ILoadingProps, any>{

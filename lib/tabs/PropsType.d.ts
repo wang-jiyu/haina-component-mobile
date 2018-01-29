@@ -6,10 +6,12 @@ export interface TabsProps {
     onBeforeChange?: Function;
     onAfterChange?: Function;
     tabClassName?: Array<string> | string | object;
+    tabMenuClassName?: Array<string> | string | object;
     tabFontClassName?: Array<string> | string | object;
     tabBarUnderlineStyle?: Array<string> | string | object;
     tabBarActiveTextColor?: Array<string> | string | object;
     tabBarInactiveTextColor?: Array<string> | string | object;
+    allShowMode?: boolean;
 }
 export interface TabItemProps {
     title: string;
