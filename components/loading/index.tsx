@@ -7,8 +7,10 @@ export interface ILoadingProps {
 }
 export default class Loading extends React.Component<ILoadingProps, any>{
 
+    public ratio = parseInt(document.documentElement.dataset.dpr)
+
     static defaultProps = {
-        size: 40
+        size: 20
     }
 
     state = {
@@ -22,20 +24,20 @@ export default class Loading extends React.Component<ILoadingProps, any>{
     componentDidMount(){
         let value = this.props.size
         this.setStyle({
-            width: value,
-            height: value
+            width: this.ratio*value,
+            height: this.ratio*value
         })
     }
     componentWillReceiveProps(nextProps) {
-        let value = 40
+        let value = 20
         if (!nextProps.size) {
-            value = 40
+            value = 20
         } else {
             value = nextProps.size
         }
         this.setStyle({
-            width: value,
-            height: value
+            width: this.ratio*value,
+            height: this.ratio*value
         })
     }
     setStyle(style) {

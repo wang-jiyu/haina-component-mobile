@@ -19,6 +19,7 @@
   "author": "sunlandong",
   "license": "ISC",
   "dependencies": {
+    "better-scroll": "^1.8.1",
     "classnames": "^2.2.5",
     "minirefresh": "^2.0.1",
     "rc-animate": "^2.4.4",
