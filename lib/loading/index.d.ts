@@ -5,6 +5,7 @@ export interface ILoadingProps {
     size?: number;
 }
 export default class Loading extends React.Component<ILoadingProps, any> {
+    ratio: number;
     static defaultProps: {
         size: number;
     };

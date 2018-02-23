@@ -6,47 +6,51 @@ import Scroll from '../../components/scroll'
 
 class BubbleExample extends React.Component<any, any>{
     state = {
-        items: 40
+        items: 20
     }
     pullingDown() {
-        setTimeout(() => {
-            if (Math.random() > 0.5) {
-                // 如果有新数据
+        return new Promise((resolve, reject) => {
+            setTimeout(() => {
                 this.setState({
-                    items: 40
+                    items: 30
                 })
-            } else {
-                // 如果没有新数据
-                (this.refs.scroll as any).forceUpdate()
-            }
-        }, 2000)
+                resolve()
+            }, 2000)
+        })
     }
     pullingUp() {
-        console.log('下拉加载更多')
-        setTimeout(() => {
-            if (Math.random() > 0.5) {
-                // 如果有新数据
-                this.setState({
-                    items: this.state.items + 5
-                })
+        return new Promise((reslove,reject)=>{
+            console.log('下拉加载更多')
+            if (this.state.items >= 45) {
+                reslove(false)
             } else {
-                // 如果没有新数据
-                (this.refs.scroll as any).forceUpdate()
+                setTimeout(() => {
+                    this.setState({
+                        items: this.state.items + 5
+                    })
+                    reslove(true)
+                }, 1500)
             }
-        }, 1500)
+        })
+        
     }
     render() {
         return (
-            <Scroll
-                ref="scroll"
-                scrollbar={{ fade: true }}
-                pullDownRefresh={{ threshold: 90, stop: 40 }}
-                pullUpLoad={{ threshold: 0 }}
-                startY={0}
-                pullingDown={() => this.pullingDown()}
-                pullingUp={() => this.pullingUp()}>
-                {Array.from(new Array(this.state.items), (el, index) => <p key={index} style={{ height: 100 }}>测试页：{`numbers:${this.state.items}`}</p>)}
-            </Scroll>
+            <div>
+                <h1 style={{ fontSize: 80 }}>测试滚动组件</h1>
+                <div style={{ height: "100vh", borderWidth: 1, borderColor: "red", borderStyle: "solid" }}>
+                    <Scroll
+                        ref="scroll"
+                        scrollbar={{ fade: true }}
+                        pullDownRefresh={{ threshold: 90, stop: 40 }}
+                        pullUpLoad={{ threshold: 0}}
+                        startY={0}
+                        pullingDown={() => this.pullingDown()}
+                        pullingUp={() => this.pullingUp()}>
+                        {Array.from(new Array(this.state.items), (el, index) => <p key={index} style={{ height: 100 }}>测试页：{`numbers:${this.state.items}`}</p>)}
+                    </Scroll>
+                </div>
+            </div>
         )
     }
 }

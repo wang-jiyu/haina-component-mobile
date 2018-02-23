@@ -1,0 +1,32 @@
+.list-wrapper{
+    position: relative;
+    height: 100%;
+    overflow: hidden;
+    background: #fff;
+    .scroll-content{
+        position: relative;
+        z-index: 1;
+    }
+    .pullup-wrapper{
+        width: 100%;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        padding: 16px 0;
+    }
+    .pulldown-wrapper{
+        position: absolute;
+        width: 100%;
+        left: 0;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        transition: all;
+        .after-trigger{
+            margin-top: 10px;
+        }
+          
+    }
+    
+    
+}

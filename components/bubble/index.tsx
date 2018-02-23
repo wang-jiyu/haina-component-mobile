@@ -5,9 +5,9 @@ export interface IBubbleProps {
 }
 export default class Bubble extends React.Component<IBubbleProps, any>{
 
-    public ratio: number = window.devicePixelRatio
+    public ratio: number = parseInt(document.documentElement.dataset.dpr)
     public width: number = 50 * this.ratio
-    public height: number = 50 * this.ratio
+    public height: number = 80 * this.ratio
     public initRadius: number = 18 * this.ratio
     public minHeadRadius: number = 12 * this.ratio
     public minTailRadius: number = 5 * this.ratio
@@ -23,8 +23,8 @@ export default class Bubble extends React.Component<IBubbleProps, any>{
     }
 
     public style = {
-        width:this.width/this.ratio,
-        height:this.height/this.ratio
+        width:this.width,
+        height:this.height
     }
     static defaultProps = {
         y: 0
@@ -44,6 +44,11 @@ export default class Bubble extends React.Component<IBubbleProps, any>{
     }
     componentWillReceiveProps(nextProps){
         this.distance = Math.max(0, Math.min(nextProps.y * this.ratio, this.maxDistance))
+        this.style = {
+            width:this.width,
+            height:this.height
+        }
+        this._draw()
     }
 
     _draw() {

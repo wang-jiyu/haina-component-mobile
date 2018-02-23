@@ -155,16 +155,15 @@ export default class Scroll extends React.Component<IScrollProps, any>{
             this.setState({
                 beforePullDown: false,
                 isPullingDown: true
-            }, () => {
-                this.props.pullingDown()
+            }, async () => {
+                await this.props.pullingDown()
+                this.forceUpdate(true)
             })
         })
 
         this.scroll.on('scroll', (pos) => {
            
             if (this.state.beforePullDown) {
-                console.log("pos",pos.y)
-                console.log("pullDownInitTop",this.pullDownInitTop)
                 this.setState({
                     bubbleY: Math.max(0, pos.y + this.pullDownInitTop),
                     pullDownStyle: {
@@ -190,8 +189,9 @@ export default class Scroll extends React.Component<IScrollProps, any>{
         this.scroll.on('pullingUp', () => {
             this.setState({
                 isPullUpLoad: true
-            }, () => {
-                this.props.pullingUp()
+            },async () => {
+                let isMore = await this.props.pullingUp()
+                this.forceUpdate(isMore)
             })
         })
     }
@@ -211,7 +211,6 @@ export default class Scroll extends React.Component<IScrollProps, any>{
         this.scroll && this.scroll.scrollToElement.apply(this.scroll, arguments)
     }
     clickItem(e, item) {
-        console.log(e)
         this.props.clickItem(item)
     }
     destroy() {
@@ -232,6 +231,7 @@ export default class Scroll extends React.Component<IScrollProps, any>{
             await this.setState({
                 isPullUpLoad: false
             })
+            console.log("isPullUpLoad",this.state.isPullUpLoad)
             this.scroll.finishPullUp()
             await this.setState({
                 pullUpDirty: dirty
@@ -258,10 +258,10 @@ export default class Scroll extends React.Component<IScrollProps, any>{
         setTimeout(async () => {
             await this.setState({
                 pullDownStyle: {
-                    top: this.pullDownInitTop,
-                    beforePullDown: true,
-                    isRebounding: false
-                }
+                    top: this.pullDownInitTop
+                },
+                beforePullDown: true,
+                isRebounding: false
             })
             this.refresh()
         }, this.scroll.options.bounceTime)
@@ -278,7 +278,7 @@ export default class Scroll extends React.Component<IScrollProps, any>{
                     </div>
                     {pullUpLoad ? (
                         <div className="pullup-wrapper">
-                            {isPullUpLoad ? (
+                            {!isPullUpLoad ? (
                                 <div className="before-trigger">
                                     <span>{this.pullUpTxt()}</span>
                                 </div>
