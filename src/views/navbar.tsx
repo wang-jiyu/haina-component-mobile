@@ -3,7 +3,7 @@
 import * as React from 'react'
 import NavBar from '../../components/navbar'
 import Icon from '../../components/icon'
-export default class Home extends React.Component<any, any>{
+export default class NavBarExample extends React.Component<any, any>{
 
 
 
