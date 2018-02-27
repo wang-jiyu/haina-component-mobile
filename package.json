@@ -1,6 +1,6 @@
 {
   "name": "@com.haina.web/haina-component-mobile",
-  "version": "1.2.5",
+  "version": "1.2.6",
   "description": "mobile component",
   "main": "index.js",
   "scripts": {

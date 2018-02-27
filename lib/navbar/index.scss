@@ -1,0 +1,47 @@
+@import '../style/default/default.scss';
+
+$navbar-height:45*$hd;
+
+.haina-navbar{
+    display: flex;
+    align-items: center;
+    height: $navbar-height;
+    background-color: $brand-primary;
+    color: $color-text-base;
+
+    .haina-navbar-left,.haina-navbar-right,.haina-navbar-title{
+        flex: 1;
+        height: 100%;
+        display: flex;
+        align-items: center;
+    }
+
+    .haina-navbar-left{
+        padding-left: $h-spacing-lg;
+        font-size: $link-button-font-size;/*px*/
+        .haina-navbar-icon{
+            margin-right: $h-spacing-sm;
+            display: inherit;
+        }
+    }
+
+    .haina-navbar-title{
+        justify-content: center;
+        font-size: 18*$hd;/*px*/
+        white-space: nowrap;
+    }
+
+    .haina-navbar-right{
+        justify-content: flex-end;
+        font-size: $link-button-font-size;/*px*/
+        margin-right: $h-spacing-lg;
+    }
+
+    .haina-navbar-light{
+        background-color: $fill-base;
+        color:  $color-text-base;
+        .haina-navbar-title{
+            color: $color-text-base;
+        }
+    }
+}
