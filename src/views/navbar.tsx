@@ -14,7 +14,7 @@ export default class NavBarExample extends React.Component<any, any>{
         return (
             <div>
                 <NavBar
-                    mode="light"
+                    mode="niuniu"
                     icon={<Icon type="left" />}
                     onLeftClick={() => console.log('onLeftClick')}
                     rightContent={[

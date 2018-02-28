@@ -3,7 +3,7 @@ import * as React from 'react';
 interface NavBarProps {
     prefixCls?: string;
     className?: string;
-    mode?: 'dark' | 'light';
+    mode?: 'niuniu' | 'light';
     icon?: React.ReactNode;
     leftContent?: any;
     rightContent?: any;
