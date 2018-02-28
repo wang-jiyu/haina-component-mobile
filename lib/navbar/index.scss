@@ -44,4 +44,12 @@ $navbar-height:45*$hd;
             color: $color-text-base;
         }
     }
+
+    .haina-navbar-niuniu{
+        background-image: linear-gradient(90deg, #FF5000 0%, #FF9300 100%);
+        color: $color-text-base-inverse;
+        .haina-navbar-title{
+            color: $color-text-base-inverse;
+        }
+    }
 }
