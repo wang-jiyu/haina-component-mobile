@@ -1,6 +1,6 @@
 @import '../style/default/default.scss';
 
-$navbar-height:45*$hd;
+$navbar-height:70*$hd;
 
 .haina-navbar{
     display: flex;
@@ -8,7 +8,7 @@ $navbar-height:45*$hd;
     height: $navbar-height;
     background-color: $brand-primary;
     color: $color-text-base;
-    padding-top: 40px;
+    padding-top: 50px;
 
     .haina-navbar-left,.haina-navbar-right,.haina-navbar-title{
         flex: 1;

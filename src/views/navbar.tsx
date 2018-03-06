@@ -12,7 +12,7 @@ export default class NavBarExample extends React.Component<any, any>{
     }
     render() {
         return (
-            <div>
+            <div style={{height:"100vh"}}>
                 <NavBar
                     mode="niuniu"
                     icon={<Icon type="left" size="lg" />}
