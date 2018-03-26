@@ -21,7 +21,7 @@ const getNewNotification = () => {
 };
 
 // notice方法实际上就是集合参数 完成对Notification的改变
-const notice = (type, content, mask = false, iconClass, onClose, duration) => {
+const notice = (type, content, mask = true, iconClass, onClose, duration) => {
   let notificationInstance = getNewNotification();
 
   notificationInstance.notice({

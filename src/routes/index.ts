@@ -3,6 +3,7 @@ const Home = Imported(() => import('../views/home'))
 const ScrollCall = Imported(() => import('../views/scrollcall/ScrollCall'))
 import ScrollExample from '../views/ScrollExample'
 import Navbar from '../views/navbar'
+import ToastExample from '../views/toastExample'
 export default [
   {
     path: '/',
@@ -23,6 +24,11 @@ export default [
     path: '/navbar',
     component: Navbar,
     exact: true
+  },
+  {
+    path:'/toast',
+    component:ToastExample,
+    exact:true
   }
 
 ]
