@@ -21,7 +21,7 @@ gulp.task('libcss', () => {
 gulp.task('es',['css'], function () {
     tsProj.options.target=2;
     return gulp.src('components/**/*{ts,tsx}')
-        .pipe(ts(tsProj))
+        .pipe(tsProj())
         .pipe(gulp.dest('es'));
 });
 
