@@ -4,6 +4,8 @@ const ScrollCall = Imported(() => import('../views/scrollcall/ScrollCall'))
 import ScrollExample from '../views/ScrollExample'
 import Navbar from '../views/navbar'
 import ToastExample from '../views/toastExample'
+import DialogExample from '../views/dialogExample';
+import ModalExample from '../views/modalExample';
 export default [
   {
     path: '/',
@@ -28,6 +30,16 @@ export default [
   {
     path:'/toast',
     component:ToastExample,
+    exact:true
+  },
+  {
+    path:'/dialog',
+    component:DialogExample,
+    exact:true
+  },
+  {
+    path:'/model',
+    component:ModalExample,
     exact:true
   }
 

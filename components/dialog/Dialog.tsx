@@ -9,7 +9,7 @@ function noop() {
 export default class Dialog extends React.Component<IDialogPropTypes, any> {
   static defaultProps = {
     afterClose: noop,
-    dialogclassName: 'haina-dialog-document',
+    dialogclassName: '',
     mask: true,
     visible: false,
     closable: false,
@@ -148,7 +148,7 @@ export default class Dialog extends React.Component<IDialogPropTypes, any> {
         role="document"
         ref={el => this.dialogRef = el}
         style={props.style || {}}
-        className={`${props.dialogclassName || ''}`}
+        className={`${props.className || ''} ${props.dialogclassName || ''}`}
         visible={props.visible}
       >
         <div className={`${prefixCls}-content`}>

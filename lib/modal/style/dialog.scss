@@ -1,0 +1,121 @@
+@import '../../style/default/default.scss';
+@import '../../style/utils/index.scss';
+.haina-component-modal {
+    position: relative;
+    &:not(.haina-component-modal-transparent):not(.haina-component-modal-popup) {
+      width: 100%;
+      height: 100%;
+    }
+  
+    .haina-component-modal-mask {
+      position: fixed;
+      top: 0;
+      right: 0;
+      left: 0;
+      bottom: 0;
+      height: 100%;
+      z-index: $modal-zindex;
+      background-color: $fill-mask;
+  
+      .haina-component-modal-mask-hidden {
+        display: none;
+      }
+    }
+  
+    .haina-component-modal-wrap {
+      position: fixed;
+      overflow: auto;
+      top: 0;
+      right: 0;
+      bottom: 0;
+      left: 0;
+      height: 100%;
+      z-index: $modal-zindex;
+      -webkit-overflow-scrolling: touch;
+      outline: 0;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      .haina-component-modal-wrap-popup {
+        display: block;
+      }
+    }
+  
+    .haina-component-modal-transparent {
+      width: 270 * $hd;
+      .haina-component-modal-content {
+        border-radius: $radius-lg;
+        padding-top: $v-spacing-lg;
+  
+        .haina-component-modal-body {
+          padding: 0 $h-spacing-lg $v-spacing-lg;
+        }
+      }
+    }
+  
+    .haina-component-modal-popup {
+      position: fixed;
+      left: 0;
+      width: 100%;
+  
+      &.haina-component-modal-popup-slide-down {
+        top: 0;
+      }
+  
+      &.haina-component-modal-popup-slide-up {
+        bottom: 0;
+      }
+    }
+  
+    .haina-component-modal-title {
+      margin: 0;
+      font-size: $modal-font-size-heading;/*px*/
+      line-height: $line-height-base;
+      color: $color-text-base;
+      text-align: center;
+    }
+  
+    .haina-component-modal-header {
+      padding: $v-spacing-sm $h-spacing-lg $v-spacing-lg;
+    }
+  
+    .haina-component-modal-content {
+      position: relative;
+      background-color: $fill-base;
+      border: 0;
+      background-clip: padding-box;
+      text-align: center;
+      height: 100%;
+      overflow: hidden;
+    }
+  
+    .haina-component-modal-close {
+      border: 0;
+      padding: 0;
+      background-color: transparent;
+      outline: none;
+      position: absolute;
+      right: $h-spacing-lg;
+      z-index: 999;
+      height: $icon-size-sm;
+      width: $icon-size-sm;
+  
+      .haina-component-modal-close-x {
+        display: inline-block;
+        width: 15 * $hd;
+        height: 15 * $hd;
+        background-repeat: no-repeat;
+        background-size: cover;
+        @include encoded-svg-background-i($modal_delete)
+      }
+    }
+  
+    .haina-component-modal-body {
+      font-size: $font-size-subhead;/*px*/
+      color: $color-text-caption;
+      height: 100%;
+      line-height: $line-height-paragraph;
+      overflow: auto;
+    }
+  }
+  

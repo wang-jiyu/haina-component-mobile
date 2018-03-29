@@ -81,7 +81,7 @@ class DialogWrap extends React.Component<IDialogPropTypes, any> {
       const container = document.createElement('div');
       const containerId = `${this.props.prefixCls}-container-${(new Date().getTime())}`;
       container.setAttribute('id', containerId);
-      container.setAttribute("class",`${this.props.prefixCls}-container`)
+      container.setAttribute("class",`${this.props.prefixCls}`)
       document.body.appendChild(container);
       this.container = container;
     }

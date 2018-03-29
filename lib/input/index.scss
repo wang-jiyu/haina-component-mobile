@@ -16,7 +16,7 @@
 
   .haina-input-label {
     color: $color-text-base;
-    font-size: $font-size-heading;
+    font-size: $font-size-heading;/*px*/
     margin-left: 0;
     margin-right: $h-spacing-sm;
     text-align: left;
@@ -50,11 +50,11 @@
   }
 
   .haina-input-control {
-    font-size: $input-font-size;
+    font-size: $input-font-size;/*px*/
     flex: 1;
     input {
       color: $color-text-base;
-      font-size: $font-size-heading;
+      font-size: $font-size-heading;/*px*/
       appearance: none;
       width: 100%;
       padding: 2 * $hd 0;
@@ -108,7 +108,7 @@
     padding-right: 0;
     line-height: $line-height-base;
     color: $color-text-caption;
-    font-size: $font-size-subhead;
+    font-size: $font-size-subhead;/*px*/
     margin-left: $h-spacing-sm;
   }
 

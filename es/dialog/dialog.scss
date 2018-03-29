@@ -1,4 +1,4 @@
-.haina-dialog-container {
+.haina-dialog {
   
     .haina-dialog-wrap {
       position: fixed;
@@ -17,7 +17,7 @@
   
     .haina-dialog-title {
       margin: 0;
-      font-size: 14px;
+      font-size: 14px;/*px*/
       line-height: 21px;
       font-weight: bold;
     }
@@ -34,14 +34,14 @@
       cursor: pointer;
       border: 0;
       background: transparent;
-      font-size: 48px;
+      font-size: 48px;/*px*/
       position: absolute;
       right: 20px;
       top: 12px;
       font-weight: 700;
       line-height: 1;
       color: #000;
-      text-shadow: 0 1px 0 #fff;
+      text-shadow: 0 1px 0 #fff;/*no*/
       filter: alpha(opacity=20);
       opacity: .2;
       text-decoration: none;
@@ -62,7 +62,7 @@
       border-radius: 5px 5px 0 0;
       background: #fff;
       color: #666;
-      border-bottom: 1px solid #e9e9e9;
+      border-bottom: 1px solid #e9e9e9;/*no*/
     }
   
     .haina-dialog-body {
@@ -70,7 +70,7 @@
     }
   
     .haina-dialog-footer {
-      border-top: 1px solid #e9e9e9;
+      border-top: 1px solid #e9e9e9;/*no*/
       padding: 10px 20px 10px 10px;
       text-align: right;
       border-radius: 0 0 5px 5px;

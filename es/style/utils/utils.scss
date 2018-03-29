@@ -1,0 +1,164 @@
+@import '../default/default.scss';
+@mixin encoded-svg-background-i($svg) {
+    background-image: url("data:image/svg+xml;charset=utf-8,#{$svg}");
+}
+@mixin ellipsis {
+    width: auto;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+}
+@mixin scale-hairline-common($color, $top, $right, $bottom, $left) {
+    content: '';
+    position: absolute;
+    background-color: $color;
+    display: block;
+    z-index: 1;
+    top: $top;
+    right: $right;
+    bottom: $bottom;
+    left: $left;
+  }
+
+@mixin hairlineTop($color: $border-color-base) {
+    border-top: 1PX solid $color;
+  
+    html:not([data-scale]) & {
+      @media (min-resolution: 2dppx) {
+        border-top: none;
+  
+        &::before {
+          @include scale-hairline-common($color, 0, auto, auto, 0);
+          width: 100%;
+          height: 1PX;
+          transform-origin: 50% 50%;
+          transform: scaleY(0.5);
+  
+          @media (min-resolution: 3dppx) {
+            transform: scaleY(0.33);
+          }
+        }
+      }
+    }
+  }
+
+@mixin hairlineLeft($color: $border-color-base){
+    border-left: 1PX solid $color;
+
+  html:not([data-scale]) & {
+    @media (min-resolution: 2dppx) {
+      border-left: none;
+
+      &::before {
+        @include scale-hairline-common($color, 0, auto, auto, 0);
+        width: 1PX;
+        height: 100%;
+        transform-origin: 100% 50%;
+        transform: scaleX(0.5);
+
+        @media (min-resolution: 3dppx) {
+          transform: scaleX(0.33);
+        }
+      }
+    }
+  }
+}
+@mixin hairlineBottom($color: $border-color-base){
+    border-bottom: 1PX solid $color;
+
+  html:not([data-scale]) & {
+    @media (min-resolution: 2dppx) {
+        border-bottom: none;
+
+      &::before {
+        @include scale-hairline-common($color, 0, auto, auto, 0);
+        width: 1PX;
+        height: 100%;
+        transform-origin: 100% 50%;
+        transform: scaleX(0.5);
+
+        @media (min-resolution: 3dppx) {
+          transform: scaleX(0.33);
+        }
+      }
+    }
+  }
+}
+@mixin hairlineRight($color: $border-color-base){
+    border-right: 1PX solid $color;
+
+  html:not([data-scale]) & {
+    @media (min-resolution: 2dppx) {
+        border-right: none;
+
+      &::before {
+        @include scale-hairline-common($color, 0, auto, auto, 0);
+        width: 1PX;
+        height: 100%;
+        transform-origin: 100% 50%;
+        transform: scaleX(0.5);
+
+        @media (min-resolution: 3dppx) {
+          transform: scaleX(0.33);
+        }
+      }
+    }
+  }
+}
+@mixin hairlineAll($color: $border-color-base,$radius: 0){
+    border: 1PX solid $color;
+    border-radius: $radius;
+  
+    html:not([data-scale]) & {
+      @media (min-resolution: 2dppx) {
+        position: relative;
+        border: none;
+  
+        &::before {
+          content: '';
+          position: absolute;
+          left: 0;
+          top: 0;
+          width: 200%;
+          height: 200%;
+          border: 1PX solid $color;
+          border-radius: $radius * 2;
+          transform-origin: 0 0;
+          transform: scale(0.5);
+          box-sizing: border-box;
+          pointer-events: none;
+        }
+      }
+    }
+}
+
+@mixin hairline-remove-left{
+    border-left: 0;
+    &:before {
+      display: none !important;
+    }
+}
+@mixin hairline-remove-right{
+    border-right: 0;
+    &:before {
+      display: none !important;
+    }
+}
+@mixin hairline-remove-bottom{
+    border-bottom: 0;
+    &:before {
+      display: none !important;
+    }
+}
+@mixin hairline-remove-top{
+    border-top: 0;
+    &:before {
+      display: none !important;
+    }
+}
+@mixin hairline-remove-top{
+    border: 0;
+    &:before {
+        display: none !important;
+    }
+}

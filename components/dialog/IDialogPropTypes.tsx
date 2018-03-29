@@ -1,5 +1,6 @@
 import * as React from 'react';
 interface IDialogPropTypes {
+  className?: string;//对话框的class
   dialogclassName?: string;//对话框的class
   style?: {};//对话框的内联样式
   mask?: boolean;//是否需要对话框外层的mask，默认true
