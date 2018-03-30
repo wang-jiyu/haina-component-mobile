@@ -55,6 +55,6 @@ class Notice extends React.Component {
 }
 Notice.defaultProps = {
     prefixCls: 'haina-notice',
-    duration: 3000
+    duration: 2500
 };
 export default Notice;

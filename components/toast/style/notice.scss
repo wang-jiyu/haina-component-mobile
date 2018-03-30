@@ -15,7 +15,7 @@
   transition: all .3s;
 
   &.leave {
-    transform: translate3D(-50%, -100%, 0);
+    /*transform: translate3D(-50%, -100%, 0);*/
     opacity: 0;
   }
 

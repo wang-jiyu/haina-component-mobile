@@ -13,7 +13,7 @@ class Notice extends React.Component<INoticeProps,any> {
     
     static defaultProps = {
         prefixCls: 'haina-notice',
-        duration: 3000
+        duration: 2500
     }
 
     public closeTimer:any
