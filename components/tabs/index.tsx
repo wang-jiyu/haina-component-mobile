@@ -16,7 +16,8 @@ export default class Tabs extends React.PureComponent<TabsProps, any> {
 
     static defaultProps = {
         tabActive: 1,
-        allShowMode: false
+        allShowMode: false,
+        tabPanelStyle:{}
     };
 
     constructor(props) {
@@ -98,19 +99,21 @@ export default class Tabs extends React.PureComponent<TabsProps, any> {
         );
     }
     _getSelectedPanel() {
+        const {tabPanelClassName,tabPanelStyle} = this.props
+        const classes = classNames('tab-panel', tabPanelClassName)
         var index = this.state.tabActive - 1;
         var $panel = this.props.children[index];
         if (this.props.allShowMode) {
             return (
                 React.Children.map(this.props.children, (child,subindex) => {
-                    return <div ref='tab-panel' className='tab-panel' style={{display:subindex===index?'block':'none'}}>
+                    return <div ref='tab-panel' className={classes} style={{display:subindex===index?'block':'none',...tabPanelStyle}}>
                         {child}
                     </div>
                 })
             )
         }
         return (
-            <div ref='tab-panel' className='tab-panel'>
+            <div ref='tab-panel' className={classes} style={tabPanelStyle}>
                 {$panel}
             </div>
         );

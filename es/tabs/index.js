@@ -76,14 +76,16 @@ export default class Tabs extends React.PureComponent {
             React.createElement("div", { className: tabMenuClass }, $menuItems)));
     }
     _getSelectedPanel() {
+        const { tabPanelClassName, tabPanelStyle } = this.props;
+        const classes = classNames('tab-panel', tabPanelClassName);
         var index = this.state.tabActive - 1;
         var $panel = this.props.children[index];
         if (this.props.allShowMode) {
             return (React.Children.map(this.props.children, (child, subindex) => {
-                return React.createElement("div", { ref: 'tab-panel', className: 'tab-panel', style: { display: subindex === index ? 'block' : 'none' } }, child);
+                return React.createElement("div", { ref: 'tab-panel', className: classes, style: Object.assign({ display: subindex === index ? 'block' : 'none' }, tabPanelStyle) }, child);
             }));
         }
-        return (React.createElement("div", { ref: 'tab-panel', className: 'tab-panel' }, $panel));
+        return (React.createElement("div", { ref: 'tab-panel', className: classes, style: tabPanelStyle }, $panel));
     }
     render() {
         var className = classNames('tabs', this.props.className);
@@ -95,5 +97,6 @@ export default class Tabs extends React.PureComponent {
 Tabs.Item = Item;
 Tabs.defaultProps = {
     tabActive: 1,
-    allShowMode: false
+    allShowMode: false,
+    tabPanelStyle: {}
 };

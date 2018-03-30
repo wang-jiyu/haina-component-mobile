@@ -10,6 +10,7 @@ export default class Tabs extends React.PureComponent<TabsProps, any> {
     static defaultProps: {
         tabActive: number;
         allShowMode: boolean;
+        tabPanelStyle: {};
     };
     constructor(props: any);
     componentDidMount(): void;

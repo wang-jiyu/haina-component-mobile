@@ -1,10 +1,17 @@
 
 .haina-notification-box {
   position: fixed;
-  top: 50%;
-  left: 50%;
-  max-width: 90%;
-  z-index: 110;
+  overflow: auto;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  z-index: 200;
+  -webkit-overflow-scrolling: touch;
+  outline: 0;
 }
 .haina-notification-mask{
   position: fixed;
@@ -14,5 +21,6 @@
   bottom: 0;
   height: 100%;
   width: 100%;
-  z-index: 100;
+  filter: alpha(opacity=50);
+  z-index: 200;
 }
