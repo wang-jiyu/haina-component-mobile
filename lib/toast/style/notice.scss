@@ -12,14 +12,16 @@
   text-align: center;
   color: #fff;
   font-family: PingFangSC-Regular;
-  transition: all .3s;
+  transition: all .25s;
 
   &.leave {
     /*transform: translate3D(-50%, -100%, 0);*/
+    transition: opacity .25s ease-in-out;
     opacity: 0;
   }
 
   // 正常提示
+  /*
   &.info {
     animation: Flop .5s linear;
   }
@@ -42,7 +44,7 @@
   .haina-notice-icon {
    
   }
-
+  */
   .haina-notice-content {
     font-size: 34px;/*px*/
     color: #fff;

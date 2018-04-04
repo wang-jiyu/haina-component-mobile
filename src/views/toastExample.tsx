@@ -13,12 +13,21 @@ class ToastExample extends React.Component<any, any>{
                 <button style={{width:'80%',height:80,backgroundColor:'#e4e3e5'}} onClick={()=>{
                     Toast.show("测试toast组件aaaaaaaaaaaaaaaa")
                 }}>测试show</button>
-                <div style={{height:2800,backgroundColor:'red'}}>
-
-                </div>
                 <button style={{width:'80%',height:80,backgroundColor:'#e4e3e5'}} onClick={()=>{
-                    Toast.show("测试toast组件",true)
-                }}>测试show</button>
+                    Toast.info("测试toast组件",true)
+                }}>测试info</button>
+                 <button style={{width:'80%',height:80,backgroundColor:'#e4e3e5'}} onClick={()=>{
+                    Toast.success("测试toast组件",true)
+                }}>测试success</button>
+                 <button style={{width:'80%',height:80,backgroundColor:'#e4e3e5'}} onClick={()=>{
+                    Toast.warning("测试toast组件",true)
+                }}>测试warning</button>
+                 <button style={{width:'80%',height:80,backgroundColor:'#e4e3e5'}} onClick={()=>{
+                    Toast.loading("")
+                }}>测试loading</button>
+                 <button style={{width:'80%',height:80,backgroundColor:'#e4e3e5'}} onClick={()=>{
+                    Toast.error("测试toast组件")
+                }}>测试error</button>
             </div>
         )
     }
